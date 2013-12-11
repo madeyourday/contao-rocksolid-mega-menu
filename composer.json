@@ -1,0 +1,38 @@
+{
+	"name":"madeyourday/contao-mega-menu",
+	"description":"Mega Menu Contao Extension",
+	"keywords":["contao","navigation","menu","mega-menu"],
+	"type":"contao-module",
+	"homepage":"http://rocksolidthemes.com/de/contao/plugins/mega-menu",
+	"license":"MIT",
+	"authors":[
+		{
+			"name":"RockSolid Themes",
+			"homepage":"http://rocksolidthemes.com/de/contao-themes",
+			"role":"Developer"
+		}
+	],
+	"support":{
+		"forum":"http://help.rocksolidthemes.com/discussions",
+		"issues":"https://github.com/madeyourday/contao-rocksolid-mega-menu/issues",
+		"source":"https://github.com/madeyourday/contao-rocksolid-mega-menu"
+	},
+	"require":{
+		"php":">=5.3",
+		"contao/core":">=3.2,<4",
+		"contao-community-alliance/composer-installer":"*"
+	},
+	"autoload":{
+		"classmap":["src/"]
+	},
+	"replace":{
+		"contao-legacy/rocksolid-mega-menu":"*"
+	},
+	"extra":{
+		"contao":{
+			"sources":{
+				"":"system/modules/rocksolid-mega-menu"
+			}
+		}
+	}
+}
