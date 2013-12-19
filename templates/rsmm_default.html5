@@ -1,0 +1,154 @@
+<div class="mega-dropdown <?php echo $this->level ?>">
+
+	<?php if ($this->type === 'html'): ?>
+
+		<?php echo $this->html ?>
+
+	<?php elseif($this->type === 'auto'): ?>
+
+		<?php foreach ($this->pages as $page): ?>
+
+			<section class="mega-dropdown-column <?php echo $page['class'] ?>">
+
+				<h1>
+					<?php if ($page['href']): ?>
+						<a href="<?php echo $page['href'] ?>"<?php echo $page['target'] ?>>
+					<?php endif ?>
+					<?php echo $page['title'] ?>
+					<?php if ($page['href']): ?>
+						</a>
+					<?php endif ?>
+				</h1>
+
+				<?php if (count($page['pages'])): ?>
+					<ul>
+						<?php foreach ($page['pages'] as $subPage): ?>
+							<li class="<?php echo $subPage['class'] ?>">
+							<?php if ($subPage['href']): ?>
+								<a href="<?php echo $subPage['href'] ?>" class="<?php echo $subPage['class'] ?>"<?php echo $subPage['target'] ?>>
+							<?php endif ?>
+							<?php echo $subPage['title'] ?>
+							<?php if ($subPage['href']): ?>
+								</a>
+							<?php endif ?>
+							</li>
+						<?php endforeach ?>
+					</ul>
+				<?php endif ?>
+
+			</section>
+
+		<?php endforeach ?>
+
+	<?php elseif($this->type === 'auto_images'): ?>
+
+		<?php foreach ($this->pages as $page): ?>
+
+			<section class="mega-dropdown-column <?php echo $page['class'] ?>">
+
+				<h1>
+					<?php if ($page['href']): ?>
+						<a href="<?php echo $page['href'] ?>"<?php echo $page['target'] ?>>
+					<?php endif ?>
+					<?php echo $page['title'] ?>
+					<?php if ($page['href']): ?>
+						</a>
+					<?php endif ?>
+				</h1>
+
+				<?php if ($page['rsmm_image']): ?>
+					<div class="mega-dropdown-image">
+						<?php if ($page['href']): ?>
+							<a href="<?php echo $page['href'] ?>"<?php echo $page['target'] ?>>
+						<?php endif ?>
+						<img src="<?php echo $page['rsmm_image']->src ?>" alt="<?php echo $page['rsmm_image']->alt ?: $page['title'] ?>"<?php echo $page['rsmm_image']->imgSize ?>>
+						<?php if ($page['href']): ?>
+							</a>
+						<?php endif ?>
+					</div>
+				<?php endif ?>
+
+			</section>
+
+		<?php endforeach ?>
+
+	<?php else: ?>
+
+		<?php foreach ($this->columns as $column): ?>
+
+			<section class="mega-dropdown-column">
+
+				<?php if ($column['displayName'] || $column['type'] === 'link'): ?>
+					<h1>
+						<?php if ($column['page'] && $column['page']['href']): ?>
+							<a href="<?php echo $column['page']['href'] ?>"<?php echo $column['page']['target'] ?>>
+						<?php endif ?>
+						<?php echo $column['name'] ?>
+						<?php if ($column['page'] && $column['page']['href']): ?>
+							</a>
+						<?php endif ?>
+					</h1>
+				<?php endif ?>
+
+				<?php if ($column['image']): ?>
+					<div class="mega-dropdown-image">
+						<?php if ($column['page'] && $column['page']['href']): ?>
+							<a href="<?php echo $column['page']['href'] ?>"<?php echo $column['page']['target'] ?>>
+						<?php endif ?>
+						<img src="<?php echo $column['image']->src ?>" alt="<?php echo $column['image']->alt ?: $column['name'] ?>"<?php echo $column['image']->imgSize ?>>
+						<?php if ($column['page'] && $column['page']['href']): ?>
+							</a>
+						<?php endif ?>
+					</div>
+				<?php endif ?>
+
+				<?php if (trim($column['text'])): ?>
+					<div class="mega-dropdown-text">
+						<?php echo $column['text'] ?>
+					</div>
+				<?php endif ?>
+
+				<?php if (count($column['pages'])): ?>
+
+					<ul>
+						<?php foreach ($column['pages'] as $subPage): ?>
+							<li class="<?php echo $subPage['class'] ?>">
+							<?php if ($subPage['href']): ?>
+								<a href="<?php echo $subPage['href'] ?>" class="<?php echo $subPage['class'] ?>"<?php echo $subPage['target'] ?>>
+							<?php endif ?>
+							<?php if (($column['type'] === 'manual_image' || $column['type'] === 'auto_image') && $subPage['rsmm_image']): ?>
+								<img src="<?php echo $subPage['rsmm_image']->src ?>" alt="<?php echo $subPage['rsmm_image']->alt ?: $column['title'] ?>"<?php echo $subPage['rsmm_image']->imgSize ?>>
+							<?php endif ?>
+							<?php echo $subPage['title'] ?>
+							<?php if ($subPage['href']): ?>
+								</a>
+							<?php endif ?>
+							</li>
+						<?php endforeach ?>
+					</ul>
+
+				<?php endif ?>
+
+				<?php if ($column['type'] === 'html'): ?>
+					<?php echo $column['html'] ?>
+				<?php endif ?>
+
+			</section>
+		<?php endforeach ?>
+
+	<?php endif ?>
+
+	<?php /*foreach ($this->items as $item): ?>
+		<?php if ($item['isActive']): ?>
+
+			<li class="<?php echo $item['class'] ?>"><span class="<?php echo $item['class'] ?>"><?php echo $item['link'] ?></span><?php echo $item['subitems'] ?></li>
+
+		<?php else: ?>
+
+			<li<?php if ($item['class']): ?> class="<?php echo $item['class'] ?>"<?php endif ?>><a href="<?php echo $item['href'] ?>" title="<?php echo $item['pageTitle'] ? $item['pageTitle'] : $item['title'] ?>"<?php if ($item['class']): ?> class="<?php echo $item['class'] ?>"<?php endif ?><?php if ($item['accesskey'] != ''): ?> accesskey="<?php echo $item['accesskey'] ?>"<?php endif ?><?php if ($item['tabindex']): ?> tabindex="<?php echo $item['tabindex'] ?>"<?php endif ?><?php if ($item['nofollow']): ?> rel="nofollow"<?php endif ?><?php echo $item['target'] ?>><?php echo $item['link'] ?></a><?php echo $item['subitems'] ?></li>
+
+		<?php endif ?>
+
+	<?php endforeach*/ ?>
+
+</div>

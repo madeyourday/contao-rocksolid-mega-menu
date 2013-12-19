@@ -1,0 +1,34 @@
+<ul class="<?php echo $this->level; ?>">
+
+	<?php foreach ($this->items as $item): ?>
+
+		<?php if ($item['rsmm_enabled']) { $item['class'] .= ' -mega'; } ?>
+		<?php $item['rsmm_color'] = deserialize($item['rsmm_color']) ?>
+
+		<?php if ($item['isActive']): ?>
+
+			<li class="<?php echo $item['class']; ?>">
+				<span<?php if ($item['rsmm_color']): ?> style="color: #<?php echo $item['rsmm_color'][0] ?>;"<?php endif ?> class="<?php echo $item['class']; ?>"><?php echo $item['link']; ?>
+					<?php if ($item['rsmm_subtitle']): ?>
+						<small><?php echo $item['rsmm_subtitle'] ?></small>
+					<?php endif ?>
+				</span>
+				<?php echo $item['subitems']; ?>
+			</li>
+
+		<?php else: ?>
+
+			<li<?php if ($item['class']): ?> class="<?php echo $item['class']; ?>"<?php endif; ?>>
+				<a href="<?php echo $item['href']; ?>" title="<?php echo $item['pageTitle'] ? $item['pageTitle'] : $item['title']; ?>"<?php if ($item['class']): ?> class="<?php echo $item['class']; ?>"<?php endif; ?><?php if ($item['accesskey'] != ''): ?> accesskey="<?php echo $item['accesskey']; ?>"<?php endif; ?><?php if ($item['tabindex']): ?> tabindex="<?php echo $item['tabindex']; ?>"<?php endif; ?><?php if ($item['nofollow']): ?> rel="nofollow"<?php endif; ?><?php echo $item['target']; ?><?php if ($item['rsmm_color']): ?> style="color: #<?php echo $item['rsmm_color'][0] ?>;"<?php endif ?>><?php echo $item['link']; ?>
+					<?php if ($item['rsmm_subtitle']): ?>
+						<small><?php echo $item['rsmm_subtitle'] ?></small>
+					<?php endif ?>
+				</a>
+				<?php echo $item['subitems']; ?>
+			</li>
+
+		<?php endif; ?>
+
+	<?php endforeach; ?>
+
+</ul>
