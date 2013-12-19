@@ -6,9 +6,9 @@
 
 	<?php elseif($this->type === 'auto'): ?>
 
-		<?php foreach ($this->pages as $page): ?>
+		<?php foreach ($this->pages as $index => $page): ?>
 
-			<section class="mega-dropdown-column <?php echo $page['class'] ?>">
+			<section class="mega-dropdown-column <?php echo $page['class'] ?> <?php echo $this->getColumnClassName($index) ?>">
 
 				<h1>
 					<?php if ($page['href']): ?>
@@ -42,9 +42,9 @@
 
 	<?php elseif($this->type === 'auto_images'): ?>
 
-		<?php foreach ($this->pages as $page): ?>
+		<?php foreach ($this->pages as $index => $page): ?>
 
-			<section class="mega-dropdown-column <?php echo $page['class'] ?>">
+			<section class="mega-dropdown-column <?php echo $page['class'] ?> <?php echo $this->getColumnClassName($index) ?>">
 
 				<h1>
 					<?php if ($page['href']): ?>
@@ -74,9 +74,9 @@
 
 	<?php else: ?>
 
-		<?php foreach ($this->columns as $column): ?>
+		<?php foreach ($this->columns as $index => $column): ?>
 
-			<section class="mega-dropdown-column">
+			<section class="mega-dropdown-column <?php echo $this->getColumnClassName($index) ?>">
 
 				<?php if ($column['displayName'] || $column['type'] === 'link'): ?>
 					<h1>

@@ -11,6 +11,11 @@
  *
  * @author Martin Auswöger <martin@madeyourday.net>
  */
+
+if (TL_MODE === 'BE') {
+	$GLOBALS['TL_CSS'][] = 'system/modules/rocksolid-columns/assets/css/be_main.css';
+}
+
 $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 
 	'config' => array(
@@ -79,9 +84,9 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 	'palettes' => array(
 		'__selector__' => array('type'),
 		'default' => '{type_legend},name,type',
-		'auto' => '{type_legend},name,type;{settings_legend},columnCount,imageSize',
-		'auto_images' => '{type_legend},name,type;{settings_legend},columnCount,imageSize',
-		'manual' => '{type_legend},name,type;{settings_legend},columnCount',
+		'auto' => '{type_legend},name,type;{rs_columns_legend},rs_columns_large,rs_columns_medium,rs_columns_small;{settings_legend},imageSize',
+		'auto_images' => '{type_legend},name,type;{rs_columns_legend},rs_columns_large,rs_columns_medium,rs_columns_small;{settings_legend},imageSize',
+		'manual' => '{type_legend},name,type;{rs_columns_legend},rs_columns_large,rs_columns_medium,rs_columns_small;{settings_legend}',
 		'html' => '{type_legend},name,type;{html_legend},html',
 	),
 
@@ -121,15 +126,30 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 			),
 			'sql' => "varchar(32) NOT NULL default ''",
 		),
-		'columnCount' => array(
-			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['columnCount'],
-			'exclude' => true,
-			'inputType' => 'select',
-			'options' => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+		'rs_columns_large' => array(
+			'inputType' => 'text',
+			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['rs_columns_large'],
 			'eval' => array(
 				'mandatory' => true,
+				'tl_class' => 'rs_columns_w33',
 			),
-			'sql' => "int(10) unsigned NOT NULL default '4'",
+			'sql' => "varchar(255) NOT NULL default ''",
+		),
+		'rs_columns_medium' => array(
+			'inputType' => 'text',
+			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['rs_columns_medium'],
+			'eval' => array(
+				'tl_class' => 'rs_columns_w33',
+			),
+			'sql' => "varchar(255) NOT NULL default ''",
+		),
+		'rs_columns_small' => array(
+			'inputType' => 'text',
+			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['rs_columns_small'],
+			'eval' => array(
+				'tl_class' => 'rs_columns_w33',
+			),
+			'sql' => "varchar(255) NOT NULL default ''",
 		),
 		'imageSize' => array(
 			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['imageSize'],

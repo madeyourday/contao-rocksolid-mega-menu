@@ -12,6 +12,7 @@ use PageModel;
 use FrontendTemplate;
 use MadeYourDay\Contao\MegaMenu\Model\MenuModel;
 use MadeYourDay\Contao\MegaMenu\Model\MenuColumnModel;
+use MadeYourDay\Contao\Element\ColumnsStart;
 
 /**
  * Menu Frontend Module
@@ -38,6 +39,18 @@ class Menu extends \ModuleNavigation
 		$template->cssID = $this->cssID;
 		$template->level = 'level_' . ($level + 1);
 		$template->html = $menu->html;
+
+		$columnsConfig = ColumnsStart::getColumnsConfiguration($menu->row());
+		$template->getColumnClassName = function ($index) use($columnsConfig) {
+			$classes = array('rs-column');
+			foreach ($columnsConfig as $name => $media) {
+				$classes = array_merge($classes, $media[$index % count($media)]);
+				if ($index < count($media)) {
+					$classes[] = '-' . $name . '-first-row';
+				}
+			}
+			return implode(' ', $classes);
+		};
 
 		if ($menu->type === 'manual') {
 

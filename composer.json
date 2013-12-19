@@ -20,6 +20,7 @@
 	"require":{
 		"php":">=5.3",
 		"contao/core":">=3.2,<4",
+		"madeyourday/contao-rocksolid-columns":"~1.0",
 		"contao-community-alliance/composer-installer":"*"
 	},
 	"autoload":{
