@@ -81,14 +81,14 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 
 	'palettes' => array(
 		'__selector__' => array('type'),
-		'default' => '{type_legend},name,type;{settings_legend},image;{publish_legend},published,start,stop',
-		'auto' => '{type_legend},name,type,displayName;{settings_legend},image,imageSize,text;{navigation_legend},page;{publish_legend},published,start,stop',
-		'auto_image' => '{type_legend},name,type,displayName;{settings_legend},image,imageSize,text;{navigation_legend},page;{publish_legend},published,start,stop',
-		'manual' => '{type_legend},name,type,displayName;{settings_legend},image,imageSize,text;{navigation_legend},page,pages;{publish_legend},published,start,stop',
-		'manual_image' => '{type_legend},name,type,displayName;{settings_legend},image,imageSize,text;{navigation_legend},page,pages;{publish_legend},published,start,stop',
-		'image' => '{type_legend},name,type,displayName;{settings_legend},image,imageSize,text;{navigation_legend},page;{publish_legend},published,start,stop',
-		'link' => '{type_legend},name,type;{navigation_legend},page;{publish_legend},published,start,stop',
-		'html' => '{type_legend},name,type,displayName;{settings_legend},html;{publish_legend},published,start,stop',
+		'default' => '{type_legend},name,type',
+		'auto' => '{type_legend},name,type,displayName;{settings_legend},image,imageSize,text;{navigation_legend},page;{expert_legend},cssClass,cssId;{publish_legend},published,start,stop',
+		'auto_image' => '{type_legend},name,type,displayName;{settings_legend},image,imageSize,text;{navigation_legend},page;{expert_legend},cssClass,cssId;{publish_legend},published,start,stop',
+		'manual' => '{type_legend},name,type,displayName;{settings_legend},image,imageSize,text;{navigation_legend},page,pages;{expert_legend},cssClass,cssId;{publish_legend},published,start,stop',
+		'manual_image' => '{type_legend},name,type,displayName;{settings_legend},image,imageSize,text;{navigation_legend},page,pages;{expert_legend},cssClass,cssId;{publish_legend},published,start,stop',
+		'image' => '{type_legend},name,type,displayName;{settings_legend},image,imageSize,text;{navigation_legend},page;{expert_legend},cssClass,cssId;{publish_legend},published,start,stop',
+		'link' => '{type_legend},name,type;{navigation_legend},page;{expert_legend},cssClass,cssId;{publish_legend},published,start,stop',
+		'html' => '{type_legend},name,type,displayName;{settings_legend},html;{expert_legend},cssClass,cssId;{publish_legend},published,start,stop',
 	),
 
 	'fields' => array(
@@ -134,6 +134,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 				'mandatory' => true,
 				'chosen' => true,
 				'submitOnChange' => true,
+				'includeBlankOption' => true,
 				'tl_class' => 'w50',
 			),
 			'sql' => "varchar(32) NOT NULL default ''",
@@ -231,6 +232,24 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 			),
 			'explanation' => 'insertTags',
 			'sql' => "mediumtext NULL",
+		),
+		'cssClass' => array(
+			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['cssClass'],
+			'exclude' => true,
+			'inputType' => 'text',
+			'eval' => array(
+				'tl_class' => 'w50 clr',
+			),
+			'sql' => "varchar(255) NOT NULL default ''",
+		),
+		'cssId' => array(
+			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['cssId'],
+			'exclude' => true,
+			'inputType' => 'text',
+			'eval' => array(
+				'tl_class' => 'w50',
+			),
+			'sql' => "varchar(255) NOT NULL default ''",
 		),
 		'published' => array(
 			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['published'],

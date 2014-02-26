@@ -36,9 +36,24 @@ class Menu extends \ModuleNavigation
 		$template = new FrontendTemplate($this->rsmm_template);
 
 		$template->type = $menu->type;
-		$template->cssID = $this->cssID;
+		$template->cssClass = $menu->cssClass;
+		$template->cssId = $menu->cssId;
 		$template->level = 'level_' . ($level + 1);
 		$template->html = $menu->html;
+		$template->backgroundImage = $this->getImageObject($menu->backgroundImage, $menu->backgroundImageSize);
+		$template->backgroundStyle = '';
+		if ($template->backgroundImage) {
+			$template->backgroundStyle .= 'background-image: url(&quot;' . $template->backgroundImage->src . '&quot;);';
+		}
+		if ($menu->backgroundSize) {
+			$template->backgroundStyle .= 'background-size: ' . $menu->backgroundSize . ';';
+		}
+		if ($menu->backgroundPosition) {
+			$template->backgroundStyle .= 'background-position: ' . $menu->backgroundPosition . ';';
+		}
+		if ($menu->backgroundRepeat) {
+			$template->backgroundStyle .= 'background-repeat: ' . $menu->backgroundRepeat . ';';
+		}
 
 		$columnsConfig = ColumnsStart::getColumnsConfiguration($menu->row());
 		$template->getColumnClassName = function ($index) use($columnsConfig) {

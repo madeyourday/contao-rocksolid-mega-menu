@@ -1,4 +1,4 @@
-<div class="mega-dropdown <?php echo $this->level ?>">
+<div class="mega-dropdown <?php echo $this->level ?> <?php echo $this->cssClass ?>"<?php if ($this->cssId): ?> id="<?php echo $this->cssId ?>"<?php endif ?><?php if ($this->backgroundStyle): ?> style="<?php echo $this->backgroundStyle ?>"<?php endif ?>>
 
 	<?php if ($this->type === 'html'): ?>
 
@@ -76,7 +76,7 @@
 
 		<?php foreach ($this->columns as $index => $column): ?>
 
-			<section class="mega-dropdown-column <?php echo $this->getColumnClassName($index) ?>">
+			<section class="mega-dropdown-column <?php echo $column['cssClass'] ?> <?php echo $this->getColumnClassName($index) ?>"<?php if ($column['cssId']): ?> id="<?php echo $column['cssId'] ?>"<?php endif ?>>
 
 				<?php if ($column['displayName'] || $column['type'] === 'link'): ?>
 					<h1>
