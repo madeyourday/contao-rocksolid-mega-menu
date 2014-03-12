@@ -13,7 +13,12 @@
  */
 
 if (TL_MODE === 'BE') {
+
 	$GLOBALS['TL_CSS'][] = 'system/modules/rocksolid-columns/assets/css/be_main.css';
+
+	// Load module language file
+	$this->loadLanguageFile('tl_module');
+
 }
 
 $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
@@ -84,9 +89,9 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 	'palettes' => array(
 		'__selector__' => array('type'),
 		'default' => '{type_legend},name,type',
-		'auto' => '{type_legend},name,type;{rs_columns_legend},rs_columns_large,rs_columns_medium,rs_columns_small;{settings_legend},imageSize;{background_legend},backgroundImage,backgroundImageSize,backgroundSize,backgroundPosition,backgroundRepeat;{expert_legend},cssClass,cssId',
-		'auto_images' => '{type_legend},name,type;{rs_columns_legend},rs_columns_large,rs_columns_medium,rs_columns_small;{settings_legend},imageSize;{background_legend},backgroundImage,backgroundImageSize,backgroundSize,backgroundPosition,backgroundRepeat;{expert_legend},cssClass,cssId',
-		'manual' => '{type_legend},name,type;{rs_columns_legend},rs_columns_large,rs_columns_medium,rs_columns_small;{background_legend},backgroundImage,backgroundImageSize,backgroundSize,backgroundPosition,backgroundRepeat;{expert_legend},cssClass,cssId',
+		'auto' => '{type_legend},name,type;{rs_columns_legend},rs_columns_large,rs_columns_medium,rs_columns_small;{slider_legend},slider,sliderNavType,sliderControls,sliderSkin,sliderGapSize,sliderMaxCount,sliderMinSize,sliderPrevNextSteps,sliderLoop;{settings_legend},imageSize;{background_legend},backgroundImage,backgroundImageSize,backgroundSize,backgroundPosition,backgroundRepeat;{expert_legend},cssClass,cssId',
+		'auto_images' => '{type_legend},name,type;{rs_columns_legend},rs_columns_large,rs_columns_medium,rs_columns_small;{slider_legend},slider,sliderNavType,sliderControls,sliderSkin,sliderGapSize,sliderMaxCount,sliderMinSize,sliderPrevNextSteps,sliderLoop;{settings_legend},imageSize;{background_legend},backgroundImage,backgroundImageSize,backgroundSize,backgroundPosition,backgroundRepeat;{expert_legend},cssClass,cssId',
+		'manual' => '{type_legend},name,type;{rs_columns_legend},rs_columns_large,rs_columns_medium,rs_columns_small;{slider_legend},slider,sliderNavType,sliderControls,sliderSkin,sliderGapSize,sliderMaxCount,sliderMinSize,sliderPrevNextSteps,sliderLoop;{background_legend},backgroundImage,backgroundImageSize,backgroundSize,backgroundPosition,backgroundRepeat;{expert_legend},cssClass,cssId',
 		'html' => '{type_legend},name,type;{html_legend},html;{background_legend},backgroundImage,backgroundImageSize,backgroundSize,backgroundPosition,backgroundRepeat;{expert_legend},cssClass,cssId',
 	),
 
@@ -129,6 +134,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 		),
 		'rs_columns_large' => array(
 			'inputType' => 'text',
+			'exclude' => true,
 			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['rs_columns_large'],
 			'eval' => array(
 				'mandatory' => true,
@@ -138,6 +144,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 		),
 		'rs_columns_medium' => array(
 			'inputType' => 'text',
+			'exclude' => true,
 			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['rs_columns_medium'],
 			'eval' => array(
 				'tl_class' => 'rs_columns_w33',
@@ -146,11 +153,85 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 		),
 		'rs_columns_small' => array(
 			'inputType' => 'text',
+			'exclude' => true,
 			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['rs_columns_small'],
 			'eval' => array(
 				'tl_class' => 'rs_columns_w33',
 			),
 			'sql' => "varchar(255) NOT NULL default ''",
+		),
+		'slider' => array(
+			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['slider'],
+			'exclude' => true,
+			'inputType' => 'checkbox',
+			'eval' => array(
+				'tl_class' => 'clr',
+			),
+			'sql' => "char(1) NOT NULL default ''",
+		),
+		'sliderNavType' => array(
+			'label' => &$GLOBALS['TL_LANG']['tl_module']['rsts_navType'],
+			'exclude' => true,
+			'inputType' => 'select',
+			'options' => array(
+				'bullets' => $GLOBALS['TL_LANG']['tl_module']['rsts_navType_bullets'],
+				'numbers' => $GLOBALS['TL_LANG']['tl_module']['rsts_navType_numbers'],
+				'tabs' => $GLOBALS['TL_LANG']['tl_module']['rsts_navType_tabs'],
+				'none' => $GLOBALS['TL_LANG']['tl_module']['rsts_navType_none'],
+			),
+			'eval' => array('tl_class' => 'w50'),
+			'sql' => "varchar(64) NOT NULL default ''",
+		),
+		'sliderControls' => array(
+			'label' => &$GLOBALS['TL_LANG']['tl_module']['rsts_controls'],
+			'exclude' => true,
+			'inputType' => 'checkbox',
+			'eval' => array('tl_class' => 'w50 m12'),
+			'sql' => "char(1) NOT NULL default '1'",
+		),
+		'sliderSkin' => array(
+			'label' => &$GLOBALS['TL_LANG']['tl_module']['rsts_customSkin'],
+			'exclude' => true,
+			'inputType' => 'text',
+			'eval' => array('tl_class' => 'w50'),
+			'sql' => "varchar(64) NOT NULL default ''",
+		),
+		'sliderGapSize' => array(
+			'label' => &$GLOBALS['TL_LANG']['tl_module']['rsts_gapSize'],
+			'exclude' => true,
+			'inputType' => 'text',
+			'eval' => array('tl_class' => 'w50'),
+			'sql' => "varchar(64) NOT NULL default '0%'",
+		),
+		'sliderMaxCount' => array(
+			'label' => &$GLOBALS['TL_LANG']['tl_module']['rsts_slideMaxCount'],
+			'exclude' => true,
+			'inputType' => 'select',
+			'options' => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20),
+			'eval' => array('tl_class' => 'w50', 'includeBlankOption' => true),
+			'sql' => "int(10) unsigned NOT NULL default '0'",
+		),
+		'sliderMinSize' => array(
+			'label' => &$GLOBALS['TL_LANG']['tl_module']['rsts_slideMinSize'],
+			'exclude' => true,
+			'inputType' => 'text',
+			'eval' => array('tl_class' => 'w50'),
+			'sql' => "int(10) unsigned NOT NULL default '0'",
+		),
+		'sliderPrevNextSteps' => array(
+			'label' => &$GLOBALS['TL_LANG']['tl_module']['rsts_prevNextSteps'],
+			'exclude' => true,
+			'inputType' => 'select',
+			'options' => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20),
+			'eval' => array('tl_class' => 'w50', 'includeBlankOption' => true),
+			'sql' => "int(10) unsigned NOT NULL default '0'",
+		),
+		'sliderLoop' => array(
+			'label' => &$GLOBALS['TL_LANG']['tl_module']['rsts_loop'],
+			'exclude' => true,
+			'inputType' => 'checkbox',
+			'eval' => array('tl_class' => 'w50 m12'),
+			'sql' => "char(1) NOT NULL default ''",
 		),
 		'imageSize' => array(
 			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['imageSize'],

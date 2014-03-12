@@ -26,6 +26,7 @@ $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['show'][0] = 'Bereich Details';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['show'][1] = 'Die Details des Bereich ID %s anzeigen';
 
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['type_legend'] = 'Name & Typ';
+$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['slider_legend'] = 'Slider-Einstellungen';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['settings_legend'] = 'Einstellungen';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['html_legend'] = 'Eigener HTML-Code';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['background_legend'] = 'Hintergrundeinstellungen';
@@ -45,6 +46,8 @@ $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['rs_columns_medium'][0] = 'Tablet-
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['rs_columns_medium'][1] = 'Bsp.: 2, statt 1-1-2 am Desktop... Anzahl und Aufteilung der Spalten für Besucher mit kleinerer Auflösung (optional).';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['rs_columns_small'][0] = 'Mobile-Spalten';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['rs_columns_small'][1] = 'Häufig 1 oder 2... Die Aufteilung für besonders kleine Bildschirme (optional, aber empfohlen).';
+$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['slider'][0] = 'Slider aktivieren';
+$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['slider'][1] = 'Erzeugt einen Slider im Dropdown.';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['imageSize'][0] = 'Bildergröße';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['imageSize'][1] = '';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['html'][0] = 'HTML-Code';

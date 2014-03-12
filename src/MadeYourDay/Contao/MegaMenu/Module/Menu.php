@@ -55,17 +55,45 @@ class Menu extends \ModuleNavigation
 			$template->backgroundStyle .= 'background-repeat: ' . $menu->backgroundRepeat . ';';
 		}
 
-		$columnsConfig = ColumnsStart::getColumnsConfiguration($menu->row());
-		$template->getColumnClassName = function ($index) use($columnsConfig) {
-			$classes = array('rs-column');
-			foreach ($columnsConfig as $name => $media) {
-				$classes = array_merge($classes, $media[$index % count($media)]);
-				if ($index < count($media)) {
-					$classes[] = '-' . $name . '-first-row';
-				}
+		if ($menu->slider && file_exists(TL_ROOT . '/system/modules/rocksolid-slider/assets/js/rocksolid-slider.min.js')) {
+			$template->slider = true;
+			$options = array(
+				'navType' => $menu->sliderNavType,
+				'controls' => $menu->sliderControls,
+				'gapSize' => $menu->sliderGapSize,
+				'skin' => $menu->sliderSkin ?: 'mega-dropdown',
+				'loop' => (bool)$menu->sliderLoop,
+				'keyboard' => false,
+			);
+			if ($menu->sliderMaxCount) {
+				$options['slideMaxCount'] = (int)$menu->sliderMaxCount;
 			}
-			return implode(' ', $classes);
-		};
+			if ($menu->sliderMinSize) {
+				$options['slideMinSize'] = (int)$menu->sliderMinSize;
+			}
+			if ($menu->sliderPrevNextSteps) {
+				$options['prevNextSteps'] = (int)$menu->sliderPrevNextSteps;
+			}
+			$template->sliderOptions = $options;
+			$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/rocksolid-slider/assets/js/rocksolid-slider.min.js|static';
+			$GLOBALS['TL_CSS'][] = 'system/modules/rocksolid-slider/assets/css/rocksolid-slider.min.css||static';
+			$template->getColumnClassName = function () {
+				return '';
+			};
+		}
+		else {
+			$columnsConfig = ColumnsStart::getColumnsConfiguration($menu->row());
+			$template->getColumnClassName = function ($index) use($columnsConfig) {
+				$classes = array('rs-column');
+				foreach ($columnsConfig as $name => $media) {
+					$classes = array_merge($classes, $media[$index % count($media)]);
+					if ($index < count($media)) {
+						$classes[] = '-' . $name . '-first-row';
+					}
+				}
+				return implode(' ', $classes);
+			};
+		}
 
 		if ($menu->type === 'manual') {
 

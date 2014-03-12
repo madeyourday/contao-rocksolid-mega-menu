@@ -1,5 +1,9 @@
 <div class="mega-dropdown <?php echo $this->level ?> <?php echo $this->cssClass ?>"<?php if ($this->cssId): ?> id="<?php echo $this->cssId ?>"<?php endif ?><?php if ($this->backgroundStyle): ?> style="<?php echo $this->backgroundStyle ?>"<?php endif ?>>
 
+	<?php if ($this->slider): ?>
+		<div class="mega-dropdown-slider">
+	<?php endif ?>
+
 	<?php if ($this->type === 'html'): ?>
 
 		<?php echo $this->html ?>
@@ -135,6 +139,24 @@
 
 			</section>
 		<?php endforeach ?>
+
+	<?php endif ?>
+
+	<?php if ($this->slider): ?>
+
+		</div>
+
+		<script>
+			(function($) {
+				var slider = $('.mega-dropdown-slider').last();
+				slider.rstSlider(<?php echo json_encode($this->sliderOptions) ?>);
+				slider.parent().parent().on('mouseenter', function() {
+					if (slider.data('rstSlider')) {
+						slider.data('rstSlider').resize();
+					}
+				});
+			})(jQuery);
+		</script>
 
 	<?php endif ?>
 
