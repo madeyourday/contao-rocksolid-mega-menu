@@ -13,4 +13,4 @@
  */
 
 $GLOBALS['TL_LANG']['tl_module']['rsmm_template'][0] = 'Mega Menu Template';
-$GLOBALS['TL_LANG']['tl_module']['rsmm_template'][1] = '';
+$GLOBALS['TL_LANG']['tl_module']['rsmm_template'][1] = 'Hier können Sie das Mega Menu Template auswählen, das die Spalten erzeugt.';

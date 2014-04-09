@@ -12,10 +12,10 @@
  * @author Martin Auswöger <martin@madeyourday.net>
  */
 
-$GLOBALS['TL_LANG']['MOD']['rocksolid_mega_menu'][0] = 'Mega Menu';
+$GLOBALS['TL_LANG']['MOD']['rocksolid_mega_menu'][0] = 'RockSolid Mega Menu';
 $GLOBALS['TL_LANG']['MOD']['rocksolid_mega_menu'][1] = 'RockSolid Mega Menu Bereiche und Spalten verwalten';
 
-$GLOBALS['TL_LANG']['FMD']['rocksolid_mega_menu'][0] = 'Mega Menu';
+$GLOBALS['TL_LANG']['FMD']['rocksolid_mega_menu'][0] = 'Mega Menu Navigation';
 $GLOBALS['TL_LANG']['FMD']['rocksolid_mega_menu'][1] = 'RockSolid Mega Menu Navigationsmodul';
-$GLOBALS['TL_LANG']['FMD']['rocksolid_mega_menu_custom'][0] = 'Individuelles Mega Menu';
+$GLOBALS['TL_LANG']['FMD']['rocksolid_mega_menu_custom'][0] = 'Individuelle Mega Menu Navigation';
 $GLOBALS['TL_LANG']['FMD']['rocksolid_mega_menu_custom'][1] = 'Individuelles RockSolid Mega Menu Navigationsmodul';
