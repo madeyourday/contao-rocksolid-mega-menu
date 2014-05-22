@@ -28,7 +28,7 @@
 		"classmap":["src/"]
 	},
 	"replace":{
-		"contao-legacy/rocksolid-mega-menu":"*"
+		"contao-legacy/rocksolid-mega-menu":"self.version"
 	},
 	"extra":{
 		"contao":{
