@@ -1,4 +1,5 @@
 <div class="mega-dropdown <?php echo $this->level ?> <?php echo $this->cssClass ?>"<?php if ($this->cssId): ?> id="<?php echo $this->cssId ?>"<?php endif ?><?php if ($this->backgroundStyle): ?> style="<?php echo $this->backgroundStyle ?>"<?php endif ?>>
+<div class="mega-dropdown-inner">
 
 	<?php if ($this->slider): ?>
 		<div class="mega-dropdown-slider">
@@ -160,4 +161,5 @@
 
 	<?php endif ?>
 
+</div>
 </div>
