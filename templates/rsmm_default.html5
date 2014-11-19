@@ -151,7 +151,7 @@
 			(function($) {
 				var slider = $('.mega-dropdown-slider').last();
 				slider.rstSlider(<?php echo json_encode($this->sliderOptions) ?>);
-				slider.parent().parent().on('mouseenter', function() {
+				slider.parent().parent().parent().on('mouseenter', function() {
 					if (slider.data('rstSlider')) {
 						slider.data('rstSlider').resize();
 					}
