@@ -275,7 +275,7 @@ class Menu extends \ModuleNavigation
 		}
 
 		$file = new \File($image->path, true);
-		if (!$file->isGdImage) {
+		if (!$file->isGdImage && !$file->isImage) {
 			return null;
 		}
 
