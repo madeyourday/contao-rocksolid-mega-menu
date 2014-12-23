@@ -23,6 +23,9 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 				'pid' => 'index',
 			)
 		),
+		'onload_callback' => array(
+			array('MadeYourDay\\Contao\\MegaMenu\\MegaMenu', 'dcaOnloadCallback'),
+		),
 	),
 
 	'list' => array(

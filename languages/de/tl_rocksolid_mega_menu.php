@@ -14,6 +14,8 @@
 
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['new'][0] = 'Neuen Bereich';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['new'][1] = 'Einen neuen Bereich erstellen';
+$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['editLicense'][0] = 'Lizenzschlüssel';
+$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['editLicense'][1] = 'Den Lizenzschlüssel bearbeiten';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['edit'][0] = 'Bereich bearbeiten';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['edit'][1] = 'Bereich ID %s bearbeiten';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['editheader'][0] = 'Bereichseinstellungen bearbeiten';

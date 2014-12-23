@@ -14,6 +14,8 @@
 
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['new'][0] = 'New section';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['new'][1] = 'Create a new section';
+$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['editLicense'][0] = 'License key';
+$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['editLicense'][1] = 'Edit the license key';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['edit'][0] = 'Edit section';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['edit'][1] = 'Edit section ID %s';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['editheader'][0] = 'Edit section settings';

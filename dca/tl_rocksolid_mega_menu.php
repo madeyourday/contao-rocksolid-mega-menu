@@ -33,6 +33,9 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 				'id' => 'primary',
 			),
 		),
+		'onload_callback' => array(
+			array('MadeYourDay\\Contao\\MegaMenu\\MegaMenu', 'dcaOnloadCallback'),
+		),
 	),
 
 	'list' => array(
@@ -47,6 +50,12 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 			'format' => '%s',
 		),
 		'global_operations' => array(
+			'license' => array(
+				'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['editLicense'],
+				'href' => 'table=tl_rocksolid_mega_menu_license',
+				'class' => 'header_icon',
+				'icon' => 'system/themes/default/images/settings.gif',
+			),
 			'all' => array(
 				'label' => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href' => 'act=select',

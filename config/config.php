@@ -20,6 +20,7 @@ array_insert($GLOBALS['BE_MOD']['design'], 2, array(
 		'tables' => array(
 			'tl_rocksolid_mega_menu',
 			'tl_rocksolid_mega_menu_column',
+			'tl_rocksolid_mega_menu_license',
 		),
 		'icon' => 'system/modules/rocksolid-mega-menu/assets/img/icon.png',
 	),
