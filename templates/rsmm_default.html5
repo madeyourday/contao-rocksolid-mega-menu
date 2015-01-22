@@ -19,7 +19,7 @@
 					<?php if ($page['href']): ?>
 						<a href="<?php echo $page['href'] ?>"<?php echo $page['target'] ?>>
 					<?php endif ?>
-					<?php echo $page['title'] ?>
+					<?php echo $page['link'] ?>
 					<?php if ($page['href']): ?>
 						</a>
 					<?php endif ?>
@@ -32,7 +32,7 @@
 							<?php if ($subPage['href']): ?>
 								<a href="<?php echo $subPage['href'] ?>" class="<?php echo $subPage['class'] ?>"<?php echo $subPage['target'] ?>>
 							<?php endif ?>
-							<?php echo $subPage['title'] ?>
+							<?php echo $subPage['link'] ?>
 							<?php if ($subPage['href']): ?>
 								</a>
 							<?php endif ?>
@@ -55,7 +55,7 @@
 					<?php if ($page['href']): ?>
 						<a href="<?php echo $page['href'] ?>"<?php echo $page['target'] ?>>
 					<?php endif ?>
-					<?php echo $page['title'] ?>
+					<?php echo $page['link'] ?>
 					<?php if ($page['href']): ?>
 						</a>
 					<?php endif ?>
@@ -136,7 +136,7 @@
 									<?php $this->insert('picture_default', $subPage['rsmm_image']->picture) ?>
 								<?php endif ?>
 							<?php endif ?>
-							<?php echo $subPage['title'] ?>
+							<?php echo $subPage['link'] ?>
 							<?php if ($subPage['href']): ?>
 								</a>
 							<?php endif ?>
