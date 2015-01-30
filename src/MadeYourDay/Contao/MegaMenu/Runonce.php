@@ -33,7 +33,10 @@ abstract class Runonce
 		) {
 			$result = $database->prepare('SELECT lickey FROM tl_repository_installs WHERE extension = \'rocksolid-mega-menu\'')->execute();
 			if ($result && MegaMenu::checkLicense((string)$result->lickey)) {
-				\Config::persist('rocksolid_mega_menu_license', (string)$result->lickey);
+				\Config::getInstance()->add(
+					'$GLOBALS[\'TL_CONFIG\'][\'rocksolid_mega_menu_license\']',
+					(string)$result->lickey
+				);
 			}
 		}
 	}
