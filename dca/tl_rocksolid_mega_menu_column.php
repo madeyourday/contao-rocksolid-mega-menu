@@ -160,6 +160,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 				'files' => true,
 				'filesOnly' => true,
 				'tl_class' => 'clr',
+				'extensions' => \Config::get('validImageTypes'),
 			),
 			'sql' => version_compare(VERSION, '3.2', '<') ? "varchar(255) NOT NULL default ''" : "binary(16) NULL",
 		),
