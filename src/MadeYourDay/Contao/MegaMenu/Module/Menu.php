@@ -35,6 +35,7 @@ class Menu extends \ModuleNavigation
 
 		$template = new FrontendTemplate($this->rsmm_template);
 
+		$template->id = $menu->id;
 		$template->type = $menu->type;
 		$template->cssClass = $menu->cssClass;
 		$template->cssId = $menu->cssId;
