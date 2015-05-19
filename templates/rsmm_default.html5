@@ -15,7 +15,7 @@
 
 			<section class="mega-dropdown-column <?php echo $page['class'] ?> <?php echo $this->getColumnClassName($index) ?>">
 
-				<h1>
+				<h3>
 					<?php if ($page['href']): ?>
 						<a href="<?php echo $page['href'] ?>"<?php echo $page['target'] ?>>
 					<?php endif ?>
@@ -23,7 +23,7 @@
 					<?php if ($page['href']): ?>
 						</a>
 					<?php endif ?>
-				</h1>
+				</h3>
 
 				<?php if (count($page['pages'])): ?>
 					<ul>
@@ -51,7 +51,7 @@
 
 			<section class="mega-dropdown-column <?php echo $page['class'] ?> <?php echo $this->getColumnClassName($index) ?>">
 
-				<h1>
+				<h3>
 					<?php if ($page['href']): ?>
 						<a href="<?php echo $page['href'] ?>"<?php echo $page['target'] ?>>
 					<?php endif ?>
@@ -59,7 +59,7 @@
 					<?php if ($page['href']): ?>
 						</a>
 					<?php endif ?>
-				</h1>
+				</h3>
 
 				<?php if ($page['rsmm_image']): ?>
 					<div class="mega-dropdown-image">
@@ -88,7 +88,7 @@
 			<section class="mega-dropdown-column <?php echo $column['cssClass'] ?> <?php echo $this->getColumnClassName($index) ?>"<?php if ($column['cssId']): ?> id="<?php echo $column['cssId'] ?>"<?php endif ?>>
 
 				<?php if ($column['displayName'] || $column['type'] === 'link'): ?>
-					<h1>
+					<h3>
 						<?php if ($column['page'] && $column['page']['href']): ?>
 							<a href="<?php echo $column['page']['href'] ?>"<?php echo $column['page']['target'] ?>>
 						<?php endif ?>
@@ -96,7 +96,7 @@
 						<?php if ($column['page'] && $column['page']['href']): ?>
 							</a>
 						<?php endif ?>
-					</h1>
+					</h3>
 				<?php endif ?>
 
 				<?php if ($column['image']): ?>
