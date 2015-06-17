@@ -21,7 +21,11 @@ ClassLoader::addClasses(array(
 	'MadeYourDay\\Contao\\MegaMenu\\Module\\MenuCustom' => 'system/modules/rocksolid-mega-menu/src/MadeYourDay/Contao/MegaMenu/Module/MenuCustom.php',
 ));
 
+$templatesFolder = version_compare(VERSION, '4.0', '>=')
+	? 'vendor/madeyourday/contao-rocksolid-mega-menu/templates'
+	: 'system/modules/rocksolid-mega-menu/templates';
+
 TemplateLoader::addFiles(array(
-	'rsmm_default' => 'system/modules/rocksolid-mega-menu/templates',
-	'nav_rsmm' => 'system/modules/rocksolid-mega-menu/templates',
+	'rsmm_default' => $templatesFolder,
+	'nav_rsmm' => $templatesFolder,
 ));

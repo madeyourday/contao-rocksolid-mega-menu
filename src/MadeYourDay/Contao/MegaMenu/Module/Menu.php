@@ -56,7 +56,11 @@ class Menu extends \ModuleNavigation
 			$template->backgroundStyle .= 'background-repeat: ' . $menu->backgroundRepeat . ';';
 		}
 
-		if ($menu->slider && file_exists(TL_ROOT . '/system/modules/rocksolid-slider/assets/js/rocksolid-slider.min.js')) {
+		$sliderAssetsDir = version_compare(VERSION, '4.0', '>=')
+			? 'web/bundles/rocksolidslider'
+			: 'system/modules/rocksolid-slider/assets';
+
+		if ($menu->slider && file_exists(TL_ROOT . '/' . $sliderAssetsDir . '/js/rocksolid-slider.min.js')) {
 			$template->slider = true;
 			$options = array(
 				'navType' => $menu->sliderNavType,
@@ -76,8 +80,8 @@ class Menu extends \ModuleNavigation
 				$options['prevNextSteps'] = (int)$menu->sliderPrevNextSteps;
 			}
 			$template->sliderOptions = $options;
-			$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/rocksolid-slider/assets/js/rocksolid-slider.min.js|static';
-			$GLOBALS['TL_CSS'][] = 'system/modules/rocksolid-slider/assets/css/rocksolid-slider.min.css||static';
+			$GLOBALS['TL_JAVASCRIPT'][] = $sliderAssetsDir . '/js/rocksolid-slider.min.js|static';
+			$GLOBALS['TL_CSS'][] = $sliderAssetsDir . '/css/rocksolid-slider.min.css||static';
 			$template->getColumnClassName = function () {
 				return '';
 			};

@@ -14,7 +14,10 @@
 
 if (TL_MODE === 'BE') {
 
-	$GLOBALS['TL_CSS'][] = 'system/modules/rocksolid-columns/assets/css/be_main.css';
+	$GLOBALS['TL_CSS'][] = (version_compare(VERSION, '4.0', '>=')
+		? 'bundles/rocksolidcolumns'
+		: 'system/modules/rocksolid-columns/assets'
+	) . '/css/be_main.css';
 
 	// Load module language file
 	$this->loadLanguageFile('tl_module');

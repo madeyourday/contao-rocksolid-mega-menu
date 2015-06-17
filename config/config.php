@@ -22,7 +22,10 @@ array_insert($GLOBALS['BE_MOD']['design'], 2, array(
 			'tl_rocksolid_mega_menu_column',
 			'tl_rocksolid_mega_menu_license',
 		),
-		'icon' => 'system/modules/rocksolid-mega-menu/assets/img/icon.png',
+		'icon' => (version_compare(VERSION, '4.0', '>=')
+			? 'bundles/rocksolidmegamenu'
+			: 'system/modules/rocksolid-mega-menu/assets'
+		) . '/img/icon.png',
 	),
 ));
 
