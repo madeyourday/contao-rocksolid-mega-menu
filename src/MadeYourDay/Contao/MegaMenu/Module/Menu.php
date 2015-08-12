@@ -169,7 +169,25 @@ class Menu extends \ModuleNavigation
 			return array();
 		}
 
+		$userGroups = FE_USER_LOGGED_IN
+			? \FrontendUser::getInstance()->groups
+			: array();
+
 		while ($pagesResult->next()) {
+
+			$pageGroups = deserialize($pagesResult->groups);
+
+			if (
+				$pagesResult->protected
+				&& !BE_USER_LOGGED_IN
+				&& (
+					!is_array($pageGroups)
+					|| !count(array_intersect($pageGroups, $userGroups))
+				)
+				&& !$this->showProtected
+			) {
+				continue;
+			}
 
 			$page = $this->getPageData($pagesResult, $imageSize);
 
@@ -184,7 +202,7 @@ class Menu extends \ModuleNavigation
 
 		}
 
-		return array_values($pages);
+		return array_values(array_filter($pages));
 	}
 
 	protected function getPageData($pagesResult, $imageSize = null)
