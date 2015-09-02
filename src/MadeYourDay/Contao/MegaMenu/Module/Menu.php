@@ -130,6 +130,9 @@ class Menu extends \ModuleNavigation
 				else if ($column['type'] === 'auto' || $column['type'] === 'auto_image') {
 					$column['pages'] = $this->buildPagesArray($column['page'], $column['imageSize']);
 				}
+				else {
+					$column['pages'] = null;
+				}
 
 				$columns[] = $column;
 
