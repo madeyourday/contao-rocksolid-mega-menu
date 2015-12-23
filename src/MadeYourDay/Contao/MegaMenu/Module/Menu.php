@@ -215,7 +215,7 @@ class Menu extends \ModuleNavigation
 		if ($pagesResult->type === 'redirect') {
 			$href = $pagesResult->url;
 			if (strncasecmp($href, 'mailto:', 7) === 0) {
-				$href = \String::encodeEmail($href);
+				$href = \StringUtil::encodeEmail($href);
 			}
 		}
 

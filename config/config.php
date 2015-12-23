@@ -12,6 +12,11 @@
  * @author Martin Auswöger <martin@madeyourday.net>
  */
 
+// Backwards compatibility for Contao < 3.5.1
+if (!class_exists('StringUtil') && class_exists('String')) {
+	class_alias('String', 'StringUtil');
+}
+
 $GLOBALS['TL_MODELS']['tl_rocksolid_mega_menu'] = 'MadeYourDay\\Contao\\MegaMenu\\Model\\MenuModel';
 $GLOBALS['TL_MODELS']['tl_rocksolid_mega_menu_column'] = 'MadeYourDay\\Contao\\MegaMenu\\Model\\MenuColumnModel';
 
