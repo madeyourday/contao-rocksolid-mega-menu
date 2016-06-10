@@ -274,7 +274,7 @@ class Menu extends \ModuleNavigation
 		$page['title'] = specialchars($pagesResult->title, true);
 		$page['pageTitle'] = specialchars($pagesResult->pageTitle, true);
 		$page['link'] = $pagesResult->title;
-		$page['href'] = $href;
+		$page['href'] = $href ?: './';
 		$page['nofollow'] = (strncmp($pagesResult->robots, 'noindex', 7) === 0);
 		$page['target'] = '';
 		$page['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $pagesResult->description);
