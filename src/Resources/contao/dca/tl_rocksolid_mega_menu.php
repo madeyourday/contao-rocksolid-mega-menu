@@ -37,7 +37,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 			),
 		),
 		'onload_callback' => array(
-			array('MadeYourDay\\Contao\\MegaMenu\\MegaMenu', 'dcaOnloadCallback'),
+			array('MadeYourDay\\RockSolidMegaMenu\\MegaMenu', 'dcaOnloadCallback'),
 		),
 	),
 

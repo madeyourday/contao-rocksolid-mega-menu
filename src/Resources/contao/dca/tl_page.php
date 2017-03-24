@@ -67,7 +67,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['rsmm_id'] = array(
 	'label' => &$GLOBALS['TL_LANG']['tl_page']['rsmm_id'],
 	'exclude' => true,
 	'inputType' => 'select',
-	'options_callback' => array('MadeYourDay\\Contao\\MegaMenu\\MegaMenu', 'getMenuIds'),
+	'options_callback' => array('MadeYourDay\\RockSolidMegaMenu\\MegaMenu', 'getMenuIds'),
 	'eval' => array(
 		'mandatory' => true,
 	),

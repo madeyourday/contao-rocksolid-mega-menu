@@ -17,8 +17,8 @@ if (!class_exists('StringUtil') && class_exists('String')) {
 	class_alias('String', 'StringUtil');
 }
 
-$GLOBALS['TL_MODELS']['tl_rocksolid_mega_menu'] = 'MadeYourDay\\Contao\\MegaMenu\\Model\\MenuModel';
-$GLOBALS['TL_MODELS']['tl_rocksolid_mega_menu_column'] = 'MadeYourDay\\Contao\\MegaMenu\\Model\\MenuColumnModel';
+$GLOBALS['TL_MODELS']['tl_rocksolid_mega_menu'] = 'MadeYourDay\\RockSolidMegaMenu\\Model\\MenuModel';
+$GLOBALS['TL_MODELS']['tl_rocksolid_mega_menu_column'] = 'MadeYourDay\\RockSolidMegaMenu\\Model\\MenuColumnModel';
 
 array_insert($GLOBALS['BE_MOD']['design'], 2, array(
 	'rocksolid_mega_menu' => array(
@@ -36,7 +36,7 @@ array_insert($GLOBALS['BE_MOD']['design'], 2, array(
 
 array_insert($GLOBALS['FE_MOD'], 2, array(
 	'navigationMenu' => array(
-		'rocksolid_mega_menu' => 'MadeYourDay\\Contao\\MegaMenu\\Module\\Menu',
-		'rocksolid_mega_menu_custom' => 'MadeYourDay\\Contao\\MegaMenu\\Module\\MenuCustom',
+		'rocksolid_mega_menu' => 'MadeYourDay\\RockSolidMegaMenu\\Module\\Menu',
+		'rocksolid_mega_menu_custom' => 'MadeYourDay\\RockSolidMegaMenu\\Module\\MenuCustom',
 	),
 ));

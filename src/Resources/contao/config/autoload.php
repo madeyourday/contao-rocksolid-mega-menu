@@ -13,12 +13,12 @@
  */
 
 ClassLoader::addClasses(array(
-	'MadeYourDay\\Contao\\MegaMenu\\MegaMenu' => 'system/modules/rocksolid-mega-menu/src/MadeYourDay/Contao/MegaMenu/MegaMenu.php',
-	'MadeYourDay\\Contao\\MegaMenu\\Runonce' => 'system/modules/rocksolid-mega-menu/src/MadeYourDay/Contao/MegaMenu/Runonce.php',
-	'MadeYourDay\\Contao\\MegaMenu\\Model\\MenuModel' => 'system/modules/rocksolid-mega-menu/src/MadeYourDay/Contao/MegaMenu/Model/MenuModel.php',
-	'MadeYourDay\\Contao\\MegaMenu\\Model\\MenuColumnModel' => 'system/modules/rocksolid-mega-menu/src/MadeYourDay/Contao/MegaMenu/Model/MenuColumnModel.php',
-	'MadeYourDay\\Contao\\MegaMenu\\Module\\Menu' => 'system/modules/rocksolid-mega-menu/src/MadeYourDay/Contao/MegaMenu/Module/Menu.php',
-	'MadeYourDay\\Contao\\MegaMenu\\Module\\MenuCustom' => 'system/modules/rocksolid-mega-menu/src/MadeYourDay/Contao/MegaMenu/Module/MenuCustom.php',
+	'MadeYourDay\\RockSolidMegaMenu\\MegaMenu' => 'system/modules/rocksolid-mega-menu/src/MadeYourDay/Contao/MegaMenu/MegaMenu.php',
+	'MadeYourDay\\RockSolidMegaMenu\\Runonce' => 'system/modules/rocksolid-mega-menu/src/MadeYourDay/Contao/MegaMenu/Runonce.php',
+	'MadeYourDay\\RockSolidMegaMenu\\Model\\MenuModel' => 'system/modules/rocksolid-mega-menu/src/MadeYourDay/Contao/MegaMenu/Model/MenuModel.php',
+	'MadeYourDay\\RockSolidMegaMenu\\Model\\MenuColumnModel' => 'system/modules/rocksolid-mega-menu/src/MadeYourDay/Contao/MegaMenu/Model/MenuColumnModel.php',
+	'MadeYourDay\\RockSolidMegaMenu\\Module\\Menu' => 'system/modules/rocksolid-mega-menu/src/MadeYourDay/Contao/MegaMenu/Module/Menu.php',
+	'MadeYourDay\\RockSolidMegaMenu\\Module\\MenuCustom' => 'system/modules/rocksolid-mega-menu/src/MadeYourDay/Contao/MegaMenu/Module/MenuCustom.php',
 ));
 
 $templatesFolder = version_compare(VERSION, '4.0', '>=')

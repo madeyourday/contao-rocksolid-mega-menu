@@ -24,7 +24,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 			)
 		),
 		'onload_callback' => array(
-			array('MadeYourDay\\Contao\\MegaMenu\\MegaMenu', 'dcaOnloadCallback'),
+			array('MadeYourDay\\RockSolidMegaMenu\\MegaMenu', 'dcaOnloadCallback'),
 		),
 	),
 
@@ -33,9 +33,9 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 			'mode' => 4,
 			'fields' => array('sorting'),
 			'headerFields' => array('name', 'type', 'columnCount'),
-			'header_callback' => array('MadeYourDay\\Contao\\MegaMenu\\MegaMenu', 'headerCallback'),
+			'header_callback' => array('MadeYourDay\\RockSolidMegaMenu\\MegaMenu', 'headerCallback'),
 			'panelLayout' => 'limit',
-			'child_record_callback' => array('MadeYourDay\\Contao\\MegaMenu\\MegaMenu', 'listColumns'),
+			'child_record_callback' => array('MadeYourDay\\RockSolidMegaMenu\\MegaMenu', 'listColumns'),
 			'child_record_class' => 'no_padding',
 		),
 		'global_operations' => array(
@@ -72,7 +72,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 				'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['toggle'],
 				'icon' => 'visible.gif',
 				'attributes' => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-				'button_callback' => array('MadeYourDay\\Contao\\MegaMenu\\MegaMenu', 'toggleColumnIcon'),
+				'button_callback' => array('MadeYourDay\\RockSolidMegaMenu\\MegaMenu', 'toggleColumnIcon'),
 			),
 			'show' => array(
 				'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['show'],

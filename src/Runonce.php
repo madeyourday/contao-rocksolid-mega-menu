@@ -6,7 +6,7 @@
  * file that was distributed with this source code.
  */
 
-namespace MadeYourDay\Contao\MegaMenu;
+namespace MadeYourDay\RockSolidMegaMenu;
 
 /**
  * RockSolid Mega Menu Runonce

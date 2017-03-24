@@ -6,12 +6,12 @@
  * file that was distributed with this source code.
  */
 
-namespace MadeYourDay\Contao\MegaMenu\Module;
+namespace MadeYourDay\RockSolidMegaMenu\Module;
 
 use PageModel;
 use FrontendTemplate;
-use MadeYourDay\Contao\MegaMenu\Model\MenuModel;
-use MadeYourDay\Contao\MegaMenu\Model\MenuColumnModel;
+use MadeYourDay\RockSolidMegaMenu\Model\MenuModel;
+use MadeYourDay\RockSolidMegaMenu\Model\MenuColumnModel;
 use MadeYourDay\Contao\Element\ColumnsStart;
 
 /**

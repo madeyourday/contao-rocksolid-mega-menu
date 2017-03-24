@@ -36,7 +36,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_license'] = array(
 				'tl_class' => 'w50',
 			),
 			'save_callback' => array(
-				array('MadeYourDay\\Contao\\MegaMenu\\MegaMenu', 'licenseSaveCallback'),
+				array('MadeYourDay\\RockSolidMegaMenu\\MegaMenu', 'licenseSaveCallback'),
 			),
 		),
 	),
