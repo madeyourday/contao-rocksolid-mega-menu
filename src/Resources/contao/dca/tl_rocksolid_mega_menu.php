@@ -14,10 +14,7 @@
 
 if (TL_MODE === 'BE') {
 
-	$GLOBALS['TL_CSS'][] = (version_compare(VERSION, '4.0', '>=')
-		? 'bundles/rocksolidcolumns'
-		: 'system/modules/rocksolid-columns/assets'
-	) . '/css/be_main.css';
+	$GLOBALS['TL_CSS'][] = 'bundles/rocksolidcolumns/css/be_main.css';
 
 	// Load module language file
 	$this->loadLanguageFile('tl_module');
@@ -249,7 +246,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['imageSize'],
 			'exclude' => true,
 			'inputType' => 'imageSize',
-			'options' => version_compare(VERSION, '3.4', '<') ? $GLOBALS['TL_CROP'] : System::getImageSizes(),
+			'options' => \System::getImageSizes(),
 			'reference' => &$GLOBALS['TL_LANG']['MSC'],
 			'eval' => array(
 				'rgxp' => 'digit',
@@ -283,13 +280,13 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 				'tl_class' => 'clr',
 				'extensions' => \Config::get('validImageTypes'),
 			),
-			'sql' => version_compare(VERSION, '3.2', '<') ? "varchar(255) NOT NULL default ''" : "binary(16) NULL",
+			'sql' => "binary(16) NULL",
 		),
 		'backgroundImageSize' => array(
 			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['backgroundImageSize'],
 			'exclude' => true,
 			'inputType' => 'imageSize',
-			'options' => version_compare(VERSION, '3.4', '<') ? $GLOBALS['TL_CROP'] : System::getImageSizes(),
+			'options' => \System::getImageSizes(),
 			'reference' => &$GLOBALS['TL_LANG']['MSC'],
 			'eval' => array(
 				'rgxp' => 'digit',

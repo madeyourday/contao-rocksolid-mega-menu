@@ -162,13 +162,13 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 				'tl_class' => 'clr',
 				'extensions' => \Config::get('validImageTypes'),
 			),
-			'sql' => version_compare(VERSION, '3.2', '<') ? "varchar(255) NOT NULL default ''" : "binary(16) NULL",
+			'sql' => "binary(16) NULL",
 		),
 		'imageSize' => array(
 			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['imageSize'],
 			'exclude' => true,
 			'inputType' => 'imageSize',
-			'options' => version_compare(VERSION, '3.4', '<') ? $GLOBALS['TL_CROP'] : System::getImageSizes(),
+			'options' => \System::getImageSizes(),
 			'reference' => &$GLOBALS['TL_LANG']['MSC'],
 			'eval' => array(
 				'rgxp' => 'digit',

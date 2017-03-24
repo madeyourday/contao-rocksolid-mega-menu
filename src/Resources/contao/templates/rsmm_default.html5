@@ -66,11 +66,7 @@
 						<?php if ($page['href']): ?>
 							<a href="<?php echo $page['href'] ?>"<?php echo $page['target'] ?>>
 						<?php endif ?>
-						<?php if (version_compare(VERSION, '3.4', '<')): ?>
-							<img src="<?php echo $page['rsmm_image']->src ?>" alt="<?php echo $page['rsmm_image']->alt ?: $page['title'] ?>"<?php echo $page['rsmm_image']->imgSize ?>>
-						<?php else: ?>
-							<?php $this->insert('picture_default', $page['rsmm_image']->picture) ?>
-						<?php endif ?>
+						<?php $this->insert('picture_default', $page['rsmm_image']->picture) ?>
 						<?php if ($page['href']): ?>
 							</a>
 						<?php endif ?>
@@ -104,11 +100,7 @@
 						<?php if ($column['page'] && $column['page']['href']): ?>
 							<a href="<?php echo $column['page']['href'] ?>"<?php echo $column['page']['target'] ?>>
 						<?php endif ?>
-						<?php if (version_compare(VERSION, '3.4', '<')): ?>
-							<img src="<?php echo $column['image']->src ?>" alt="<?php echo $column['image']->alt ?: $column['name'] ?>"<?php echo $column['image']->imgSize ?>>
-						<?php else: ?>
-							<?php $this->insert('picture_default', $column['image']->picture) ?>
-						<?php endif ?>
+						<?php $this->insert('picture_default', $column['image']->picture) ?>
 						<?php if ($column['page'] && $column['page']['href']): ?>
 							</a>
 						<?php endif ?>
@@ -130,11 +122,7 @@
 								<a href="<?php echo $subPage['href'] ?>" class="<?php echo $subPage['class'] ?>"<?php echo $subPage['target'] ?>>
 							<?php endif ?>
 							<?php if (($column['type'] === 'manual_image' || $column['type'] === 'auto_image') && $subPage['rsmm_image']): ?>
-								<?php if (version_compare(VERSION, '3.4', '<')): ?>
-									<img src="<?php echo $subPage['rsmm_image']->src ?>" alt="<?php echo $subPage['rsmm_image']->alt ?: $column['title'] ?>"<?php echo $subPage['rsmm_image']->imgSize ?>>
-								<?php else: ?>
-									<?php $this->insert('picture_default', $subPage['rsmm_image']->picture) ?>
-								<?php endif ?>
+								<?php $this->insert('picture_default', $subPage['rsmm_image']->picture) ?>
 							<?php endif ?>
 							<?php echo $subPage['link'] ?>
 							<?php if ($subPage['href']): ?>

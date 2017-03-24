@@ -56,9 +56,7 @@ class Menu extends \ModuleNavigation
 			$template->backgroundStyle .= 'background-repeat: ' . $menu->backgroundRepeat . ';';
 		}
 
-		$sliderAssetsDir = version_compare(VERSION, '4.0', '>=')
-			? 'web/bundles/rocksolidslider'
-			: 'system/modules/rocksolid-slider/assets';
+		$sliderAssetsDir = 'web/bundles/rocksolidslider';
 
 		if ($menu->slider && file_exists(TL_ROOT . '/' . $sliderAssetsDir . '/js/rocksolid-slider.min.js')) {
 			$template->slider = true;
