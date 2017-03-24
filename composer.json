@@ -23,7 +23,9 @@
 		"madeyourday/contao-rocksolid-slider":"~1.3"
 	},
 	"autoload":{
-		"classmap":["src/"]
+		"psr-4": {
+			"MadeYourDay\\Contao\\MegaMenu\\": "src/"
+		}
 	},
 	"replace":{
 		"contao-legacy/rocksolid-mega-menu":"self.version"
