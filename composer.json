@@ -2,25 +2,29 @@
 	"name":"madeyourday/contao-rocksolid-mega-menu",
 	"description":"Mega Menu Contao Extension",
 	"keywords":["contao","navigation","menu","mega-menu"],
-	"type":"contao-module",
-	"homepage":"http://rocksolidthemes.com/de/contao/plugins/mega-menu",
+	"type":"contao-bundle",
+	"homepage":"https://rocksolidthemes.com/de/contao/plugins/mega-menu",
 	"license":"commercial",
 	"authors":[
 		{
 			"name":"RockSolid Themes",
-			"homepage":"http://rocksolidthemes.com/de/contao-themes",
+			"homepage":"https://rocksolidthemes.com/de/contao-themes",
 			"role":"Developer"
 		}
 	],
 	"support":{
-		"forum":"http://help.rocksolidthemes.com/discussions",
+		"forum":"http://help.rocksolidthemes.com/discussions/contao",
 		"issues":"https://github.com/madeyourday/contao-rocksolid-mega-menu/issues",
 		"source":"https://github.com/madeyourday/contao-rocksolid-mega-menu"
 	},
 	"require":{
-		"php":">=5.3",
-		"madeyourday/contao-rocksolid-columns":"~1.0",
-		"madeyourday/contao-rocksolid-slider":"~1.3"
+		"php":">=5.5",
+		"contao/core-bundle":"^4.3",
+		"madeyourday/contao-rocksolid-columns":"^2.0",
+		"madeyourday/contao-rocksolid-slider":"^2.0"
+	},
+	"conflict": {
+		"contao/core": "*"
 	},
 	"autoload":{
 		"psr-4": {
@@ -33,11 +37,6 @@
 	"extra":{
 		"branch-alias": {
 			"dev-develop": "2.0.x-dev"
-		},
-		"contao":{
-			"sources":{
-				"":"system/modules/rocksolid-mega-menu"
-			}
 		}
 	}
 }
