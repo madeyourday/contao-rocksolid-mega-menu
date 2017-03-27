@@ -54,7 +54,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 				'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['editLicense'],
 				'href' => 'table=tl_rocksolid_mega_menu_license',
 				'class' => 'header_icon',
-				'icon' => 'system/themes/' . \Controller::getTheme() . '/images/settings.gif',
+				'icon' => 'system/themes/' . \Backend::getTheme() . '/images/settings.gif',
 			),
 			'all' => array(
 				'label' => &$GLOBALS['TL_LANG']['MSC']['all'],
@@ -246,7 +246,11 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['imageSize'],
 			'exclude' => true,
 			'inputType' => 'imageSize',
-			'options' => \System::getImageSizes(),
+			'options_callback' => function () {
+				return System::getContainer()
+					->get('contao.image.image_sizes')
+					->getOptionsForUser(BackendUser::getInstance());
+			},
 			'reference' => &$GLOBALS['TL_LANG']['MSC'],
 			'eval' => array(
 				'rgxp' => 'digit',
@@ -286,7 +290,11 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['backgroundImageSize'],
 			'exclude' => true,
 			'inputType' => 'imageSize',
-			'options' => \System::getImageSizes(),
+			'options_callback' => function () {
+				return System::getContainer()
+					->get('contao.image.image_sizes')
+					->getOptionsForUser(BackendUser::getInstance());
+			},
 			'reference' => &$GLOBALS['TL_LANG']['MSC'],
 			'eval' => array(
 				'rgxp' => 'digit',

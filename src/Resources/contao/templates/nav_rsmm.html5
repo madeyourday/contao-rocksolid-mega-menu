@@ -3,7 +3,7 @@
 	<?php foreach ($this->items as $item): ?>
 
 		<?php if ($item['rsmm_enabled']) { $item['class'] .= ' -mega'; } ?>
-		<?php $item['rsmm_color'] = deserialize($item['rsmm_color']) ?>
+		<?php $item['rsmm_color'] = \StringUtil::deserialize($item['rsmm_color']) ?>
 
 		<?php if ($item['isActive']): ?>
 

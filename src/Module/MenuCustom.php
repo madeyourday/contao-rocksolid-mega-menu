@@ -27,7 +27,7 @@ class MenuCustom extends Menu
 			$groups = $this->User->groups;
 		}
 
-		$objPages = \PageModel::findPublishedRegularWithoutGuestsByIds(deserialize($this->pages, true));
+		$objPages = \PageModel::findPublishedRegularWithoutGuestsByIds(\StringUtil::deserialize($this->pages, true));
 
 		if ($objPages === null) {
 			return;
@@ -37,7 +37,7 @@ class MenuCustom extends Menu
 
 		// Sort the array keys according to the given order
 		if ($this->orderPages != '') {
-			$tmp = deserialize($this->orderPages);
+			$tmp = \StringUtil::deserialize($this->orderPages);
 
 			if (!empty($tmp) && is_array($tmp)) {
 				$arrPages = array_map(function(){}, array_flip($tmp));
@@ -55,7 +55,7 @@ class MenuCustom extends Menu
 		$objTemplate->level = 'level_1';
 
 		while ($objPages->next()) {
-			$_groups = deserialize($arrPage['groups']);
+			$_groups = \StringUtil::deserialize($arrPage['groups']);
 
 			if (!$arrPage['protected'] || BE_USER_LOGGED_IN || (is_array($_groups) && count(array_intersect($_groups, $groups))) || $this->showProtected) {
 				$arrPages[$objPages->id] = $this->getPageData($objPages);
@@ -77,7 +77,7 @@ class MenuCustom extends Menu
 
 		$this->Template->request = \Environment::get('indexFreeRequest');
 		$this->Template->skipId = 'skipNavigation' . $this->id;
-		$this->Template->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
+		$this->Template->skipNavigation = \StringUtil::specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
 		$this->Template->items = !empty($items) ? $objTemplate->parse() : '';
 	}
 }

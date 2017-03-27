@@ -12,7 +12,7 @@ use PageModel;
 use FrontendTemplate;
 use MadeYourDay\RockSolidMegaMenu\Model\MenuModel;
 use MadeYourDay\RockSolidMegaMenu\Model\MenuColumnModel;
-use MadeYourDay\Contao\Element\ColumnsStart;
+use MadeYourDay\RockSolidColumns\Element\ColumnsStart;
 
 /**
  * Menu Frontend Module
@@ -152,10 +152,10 @@ class Menu extends \ModuleNavigation
 
 		if ($orderPages !== null) {
 
-			$pagesResult = PageModel::findPublishedRegularWithoutGuestsByIds(deserialize($pid, true));
+			$pagesResult = PageModel::findPublishedRegularWithoutGuestsByIds(\StringUtil::deserialize($pid, true));
 
 			if ($orderPages != '') {
-				$orderPages = deserialize($orderPages);
+				$orderPages = \StringUtil::deserialize($orderPages);
 
 				if (!empty($orderPages) && is_array($orderPages)) {
 					$pages = array_map(function(){}, array_flip($orderPages));
@@ -176,7 +176,7 @@ class Menu extends \ModuleNavigation
 
 		while ($pagesResult->next()) {
 
-			$pageGroups = deserialize($pagesResult->groups);
+			$pageGroups = \StringUtil::deserialize($pagesResult->groups);
 
 			if (
 				$pagesResult->protected
@@ -227,28 +227,12 @@ class Menu extends \ModuleNavigation
 			}
 
 			if ($targetPage !== null) {
-
-				$forceLang = null;
-				$targetPage->loadDetails();
-
-				if ($GLOBALS['TL_CONFIG']['addLanguageToUrl']) {
-					$forceLang = $targetPage->language;
-				}
-
-				$href = $this->generateFrontendUrl($targetPage->row(), null, $forceLang);
-
-				if ($targetPage->domain != '' && $targetPage->domain != \Environment::get('host')) {
-					$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $targetPage->domain . TL_PATH . '/' . $href;
-				}
-
+				$href = $targetPage->getFrontendUrl();
 			}
 
 		}
 		if (!$href) {
-			$href = $this->generateFrontendUrl($pagesResult->row(), null, $language);
-			if ($pagesResult->domain != '' && $pagesResult->domain != \Environment::get('host')) {
-				$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $pagesResult->domain . TL_PATH . '/' . $href;
-			}
+			$href = $pagesResult->current()->getFrontendUrl();
 		}
 
 		if (
@@ -269,8 +253,8 @@ class Menu extends \ModuleNavigation
 		$page = $pagesResult->row();
 
 		$page['class'] = trim($cssClass);
-		$page['title'] = specialchars($pagesResult->title, true);
-		$page['pageTitle'] = specialchars($pagesResult->pageTitle, true);
+		$page['title'] = \StringUtil::specialchars($pagesResult->title, true);
+		$page['pageTitle'] = \StringUtil::specialchars($pagesResult->pageTitle, true);
 		$page['link'] = $pagesResult->title;
 		$page['href'] = $href ?: './';
 		$page['nofollow'] = (strncmp($pagesResult->robots, 'noindex', 7) === 0);
@@ -306,7 +290,7 @@ class Menu extends \ModuleNavigation
 		$imageMeta = $this->getMetaData($image->meta, $GLOBALS['objPage']->language);
 
 		if (is_string($size) && trim($size)) {
-			$size = deserialize($size);
+			$size = \StringUtil::deserialize($size);
 		}
 		if (!is_array($size)) {
 			$size = array(0, 0, 'center_center');

@@ -38,7 +38,7 @@ class MegaMenu extends \Backend
 			$icon = 'invisible.gif';
 		}
 
-		return '<a href="' . $this->addToUrl($href) . '" title="' . specialchars($title) . '"' . $attributes . '>' . $this->generateImage($icon, $label) . '</a> ';
+		return '<a href="' . $this->addToUrl($href) . '" title="' . \StringUtil::specialchars($title) . '"' . $attributes . '>' . \Image::getHtml($icon, $label) . '</a> ';
 	}
 
 	/**
