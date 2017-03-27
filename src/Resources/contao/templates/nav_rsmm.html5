@@ -5,29 +5,27 @@
 		<?php if ($item['rsmm_enabled']) { $item['class'] .= ' -mega'; } ?>
 		<?php $item['rsmm_color'] = \StringUtil::deserialize($item['rsmm_color']) ?>
 
-		<?php if ($item['isActive']): ?>
+		<li class="<?= $item['class'] ?>">
 
-			<li class="<?= $item['class'] ?>">
-				<span<?php if ($item['rsmm_color'] && $item['rsmm_color'][0]): ?> style="color: #<?= $item['rsmm_color'][0] ?>;"<?php endif ?> class="<?= $item['class'] ?>"><?= $item['link'] ?>
-					<?php if ($item['rsmm_subtitle']): ?>
-						<small><?= $item['rsmm_subtitle'] ?></small>
-					<?php endif ?>
-				</span>
-				<?= $item['subitems'] ?>
-			</li>
+			<?php if ($item['isActive']): ?>
+				<strong<?php if ($item['rsmm_color'] && $item['rsmm_color'][0]): ?> style="color: #<?= $item['rsmm_color'][0] ?>;"<?php endif ?> class="<?= $item['class'] ?>"<?php if (!empty($item['subitems'])) echo ' aria-haspopup="true"' ?> itemprop="name"><?= $item['link'] ?>
+			<?php else: ?>
+				<a href="<?= $item['href'] ?: './' ?>" title="<?= $item['pageTitle'] ?: $item['title'] ?>" class="<?= $item['class'] ?>"<?php if ($item['accesskey']) echo ' accesskey="' . $item['accesskey'] . '"' ?><?php if ($item['tabindex']) echo ' tabindex="' . $item['tabindex'] . '"' ?><?php if ($item['nofollow']) echo ' rel="nofollow"' ?><?= $item['target'] ?><?php if ($item['rsmm_color'] && $item['rsmm_color'][0]): ?> style="color: #<?= $item['rsmm_color'][0] ?>;"<?php endif ?><?php if (!empty($item['subitems'])) echo ' aria-haspopup="true"' ?> itemprop="url"><span itemprop="name"><?= $item['link'] ?></span>
+			<?php endif ?>
 
-		<?php else: ?>
+			<?php if ($item['rsmm_subtitle']): ?>
+				<small><?= $item['rsmm_subtitle'] ?></small>
+			<?php endif ?>
 
-			<li<?php if ($item['class']): ?> class="<?= $item['class'] ?>"<?php endif ?>>
-				<a href="<?= $item['href'] ?>" title="<?= $item['pageTitle'] ? $item['pageTitle'] : $item['title'] ?>"<?php if ($item['class']): ?> class="<?= $item['class'] ?>"<?php endif ?><?php if ($item['accesskey'] != ''): ?> accesskey="<?= $item['accesskey'] ?>"<?php endif ?><?php if ($item['tabindex']): ?> tabindex="<?= $item['tabindex'] ?>"<?php endif ?><?php if ($item['nofollow']): ?> rel="nofollow"<?php endif ?><?= $item['target'] ?><?php if ($item['rsmm_color'] && $item['rsmm_color'][0]): ?> style="color: #<?= $item['rsmm_color'][0] ?>;"<?php endif ?>><?= $item['link'] ?>
-					<?php if ($item['rsmm_subtitle']): ?>
-						<small><?= $item['rsmm_subtitle'] ?></small>
-					<?php endif ?>
+			<?php if ($item['isActive']): ?>
+				</strong>
+			<?php else: ?>
 				</a>
-				<?= $item['subitems'] ?>
-			</li>
+			<?php endif ?>
 
-		<?php endif ?>
+			<?= $item['subitems'] ?>
+
+		</li>
 
 	<?php endforeach ?>
 
