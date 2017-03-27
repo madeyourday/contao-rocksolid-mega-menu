@@ -1,4 +1,4 @@
-<div class="mega-dropdown <?php echo $this->level ?> <?php echo $this->cssClass ?>"<?php if ($this->cssId): ?> id="<?php echo $this->cssId ?>"<?php endif ?><?php if ($this->backgroundStyle): ?> style="<?php echo $this->backgroundStyle ?>"<?php endif ?>>
+<div class="mega-dropdown <?= $this->level ?> <?= $this->cssClass ?>"<?php if ($this->cssId): ?> id="<?= $this->cssId ?>"<?php endif ?><?php if ($this->backgroundStyle): ?> style="<?= $this->backgroundStyle ?>"<?php endif ?>>
 <div class="mega-dropdown-inner">
 
 	<?php if ($this->slider): ?>
@@ -7,19 +7,19 @@
 
 	<?php if ($this->type === 'html'): ?>
 
-		<?php echo $this->html ?>
+		<?= $this->html ?>
 
 	<?php elseif($this->type === 'auto'): ?>
 
 		<?php foreach ($this->pages as $index => $page): ?>
 
-			<section class="mega-dropdown-column <?php echo $page['class'] ?> <?php echo $this->getColumnClassName($index) ?>">
+			<section class="mega-dropdown-column <?= $page['class'] ?> <?= $this->getColumnClassName($index) ?>">
 
 				<h3>
 					<?php if ($page['href']): ?>
-						<a href="<?php echo $page['href'] ?>"<?php echo $page['target'] ?>>
+						<a href="<?= $page['href'] ?>"<?= $page['target'] ?>>
 					<?php endif ?>
-					<?php echo $page['link'] ?>
+					<?= $page['link'] ?>
 					<?php if ($page['href']): ?>
 						</a>
 					<?php endif ?>
@@ -28,11 +28,11 @@
 				<?php if (count($page['pages'])): ?>
 					<ul>
 						<?php foreach ($page['pages'] as $subPage): ?>
-							<li class="<?php echo $subPage['class'] ?>">
+							<li class="<?= $subPage['class'] ?>">
 							<?php if ($subPage['href']): ?>
-								<a href="<?php echo $subPage['href'] ?>" class="<?php echo $subPage['class'] ?>"<?php echo $subPage['target'] ?>>
+								<a href="<?= $subPage['href'] ?>" class="<?= $subPage['class'] ?>"<?= $subPage['target'] ?>>
 							<?php endif ?>
-							<?php echo $subPage['link'] ?>
+							<?= $subPage['link'] ?>
 							<?php if ($subPage['href']): ?>
 								</a>
 							<?php endif ?>
@@ -49,13 +49,13 @@
 
 		<?php foreach ($this->pages as $index => $page): ?>
 
-			<section class="mega-dropdown-column <?php echo $page['class'] ?> <?php echo $this->getColumnClassName($index) ?>">
+			<section class="mega-dropdown-column <?= $page['class'] ?> <?= $this->getColumnClassName($index) ?>">
 
 				<h3>
 					<?php if ($page['href']): ?>
-						<a href="<?php echo $page['href'] ?>"<?php echo $page['target'] ?>>
+						<a href="<?= $page['href'] ?>"<?= $page['target'] ?>>
 					<?php endif ?>
-					<?php echo $page['link'] ?>
+					<?= $page['link'] ?>
 					<?php if ($page['href']): ?>
 						</a>
 					<?php endif ?>
@@ -64,7 +64,7 @@
 				<?php if ($page['rsmm_image']): ?>
 					<div class="mega-dropdown-image">
 						<?php if ($page['href']): ?>
-							<a href="<?php echo $page['href'] ?>"<?php echo $page['target'] ?>>
+							<a href="<?= $page['href'] ?>"<?= $page['target'] ?>>
 						<?php endif ?>
 						<?php $this->insert('picture_default', $page['rsmm_image']->picture) ?>
 						<?php if ($page['href']): ?>
@@ -81,14 +81,14 @@
 
 		<?php foreach ($this->columns as $index => $column): ?>
 
-			<section class="mega-dropdown-column <?php echo $column['cssClass'] ?> <?php echo $this->getColumnClassName($index) ?>"<?php if ($column['cssId']): ?> id="<?php echo $column['cssId'] ?>"<?php endif ?>>
+			<section class="mega-dropdown-column <?= $column['cssClass'] ?> <?= $this->getColumnClassName($index) ?>"<?php if ($column['cssId']): ?> id="<?= $column['cssId'] ?>"<?php endif ?>>
 
 				<?php if ($column['displayName'] || $column['type'] === 'link'): ?>
 					<h3>
 						<?php if ($column['page'] && $column['page']['href']): ?>
-							<a href="<?php echo $column['page']['href'] ?>"<?php echo $column['page']['target'] ?>>
+							<a href="<?= $column['page']['href'] ?>"<?= $column['page']['target'] ?>>
 						<?php endif ?>
-						<?php echo $column['name'] ?>
+						<?= $column['name'] ?>
 						<?php if ($column['page'] && $column['page']['href']): ?>
 							</a>
 						<?php endif ?>
@@ -98,7 +98,7 @@
 				<?php if ($column['image']): ?>
 					<div class="mega-dropdown-image">
 						<?php if ($column['page'] && $column['page']['href']): ?>
-							<a href="<?php echo $column['page']['href'] ?>"<?php echo $column['page']['target'] ?>>
+							<a href="<?= $column['page']['href'] ?>"<?= $column['page']['target'] ?>>
 						<?php endif ?>
 						<?php $this->insert('picture_default', $column['image']->picture) ?>
 						<?php if ($column['page'] && $column['page']['href']): ?>
@@ -109,7 +109,7 @@
 
 				<?php if (trim($column['text'])): ?>
 					<div class="mega-dropdown-text">
-						<?php echo $column['text'] ?>
+						<?= $column['text'] ?>
 					</div>
 				<?php endif ?>
 
@@ -117,14 +117,14 @@
 
 					<ul>
 						<?php foreach ($column['pages'] as $subPage): ?>
-							<li class="<?php echo $subPage['class'] ?>">
+							<li class="<?= $subPage['class'] ?>">
 							<?php if ($subPage['href']): ?>
-								<a href="<?php echo $subPage['href'] ?>" class="<?php echo $subPage['class'] ?>"<?php echo $subPage['target'] ?>>
+								<a href="<?= $subPage['href'] ?>" class="<?= $subPage['class'] ?>"<?= $subPage['target'] ?>>
 							<?php endif ?>
 							<?php if (($column['type'] === 'manual_image' || $column['type'] === 'auto_image') && $subPage['rsmm_image']): ?>
 								<?php $this->insert('picture_default', $subPage['rsmm_image']->picture) ?>
 							<?php endif ?>
-							<?php echo $subPage['link'] ?>
+							<?= $subPage['link'] ?>
 							<?php if ($subPage['href']): ?>
 								</a>
 							<?php endif ?>
@@ -135,7 +135,7 @@
 				<?php endif ?>
 
 				<?php if ($column['type'] === 'html'): ?>
-					<?php echo $column['html'] ?>
+					<?= $column['html'] ?>
 				<?php endif ?>
 
 			</section>
@@ -150,7 +150,7 @@
 		<script>
 			(function($) {
 				var slider = $('.mega-dropdown-slider').last();
-				slider.rstSlider(<?php echo json_encode($this->sliderOptions) ?>);
+				slider.rstSlider(<?= json_encode($this->sliderOptions) ?>);
 				slider.parent().parent().parent().on('mouseenter', function() {
 					if (slider.data('rstSlider')) {
 						slider.data('rstSlider').resize();
