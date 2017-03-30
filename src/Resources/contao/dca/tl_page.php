@@ -29,6 +29,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['rsmm_subtitle'] = array(
 );
 $GLOBALS['TL_DCA']['tl_page']['fields']['rsmm_color'] = array(
 	'label' => &$GLOBALS['TL_LANG']['tl_page']['rsmm_color'],
+	'exclude' => true,
 	'inputType' => 'text',
 	'eval' => array(
 		'maxlength' => 6,
