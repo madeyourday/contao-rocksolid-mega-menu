@@ -39,9 +39,6 @@
 		"contao-legacy/rocksolid-mega-menu":"self.version"
 	},
 	"extra":{
-		"branch-alias": {
-			"dev-develop": "2.0.x-dev"
-		},
 		"contao-manager-plugin": "MadeYourDay\\RockSolidMegaMenu\\ContaoManagerPlugin"
 	}
 }
