@@ -4,7 +4,7 @@
 	"keywords":["contao","navigation","menu","mega-menu"],
 	"type":"contao-bundle",
 	"homepage":"https://rocksolidthemes.com/de/contao/plugins/mega-menu",
-	"license":"commercial",
+	"license":"proprietary",
 	"authors":[
 		{
 			"name":"RockSolid Themes",
