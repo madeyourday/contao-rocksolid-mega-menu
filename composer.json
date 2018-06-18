@@ -19,7 +19,7 @@
 	},
 	"require":{
 		"php":">=5.5",
-		"contao/core-bundle":"^4.3",
+		"contao/core-bundle":"^4.4",
 		"madeyourday/contao-rocksolid-columns":"^2.0",
 		"madeyourday/contao-rocksolid-slider":"^2.0"
 	},
