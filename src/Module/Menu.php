@@ -58,7 +58,7 @@ class Menu extends \ModuleNavigation
 
 		$sliderAssetsDir = 'bundles/rocksolidslider';
 
-		if ($menu->slider && file_exists(TL_ROOT . '/web/' . $sliderAssetsDir . '/js/rocksolid-slider.min.js')) {
+		if ($menu->slider && file_exists(\System::getContainer()->getParameter('contao.web_dir') . '/' . $sliderAssetsDir . '/js/rocksolid-slider.min.js')) {
 			$template->slider = true;
 			$options = array(
 				'navType' => $menu->sliderNavType,
