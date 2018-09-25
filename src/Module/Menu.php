@@ -129,7 +129,7 @@ class Menu extends \ModuleNavigation
 					$column['pages'] = $this->buildPagesArray($column['page'], $column['imageSize']);
 				}
 				else {
-					$column['pages'] = null;
+					$column['pages'] = array();
 				}
 
 				$columns[] = $column;
