@@ -23,6 +23,12 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_license'] = array(
 		),
 	),
 
+	'list' => array(
+		'sorting' => array(
+			'mode' => 5,
+		),
+	),
+
 	'palettes' => array(
 		'default' => '{license_legend},rocksolid_mega_menu_license',
 	),
