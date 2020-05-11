@@ -26,19 +26,12 @@
 				</h3>
 
 				<?php if (count($page['pages'])): ?>
-					<ul>
-						<?php foreach ($page['pages'] as $subPage): ?>
-							<li class="<?= $subPage['class'] ?>">
-							<?php if ($subPage['href']): ?>
-								<a href="<?= $subPage['href'] ?>" class="<?= $subPage['class'] ?>"<?= $subPage['target'] ?>>
-							<?php endif ?>
-							<?= $subPage['link'] ?>
-							<?php if ($subPage['href']): ?>
-								</a>
-							<?php endif ?>
-							</li>
-						<?php endforeach ?>
-					</ul>
+
+					<?php $this->insert('rsmmnav_default', [
+						'items' => $page['pages'],
+						'type' => $this->type,
+					]) ?>
+
 				<?php endif ?>
 
 			</section>
@@ -115,22 +108,10 @@
 
 				<?php if (count($column['pages'])): ?>
 
-					<ul>
-						<?php foreach ($column['pages'] as $subPage): ?>
-							<li class="<?= $subPage['class'] ?>">
-							<?php if ($subPage['href']): ?>
-								<a href="<?= $subPage['href'] ?>" class="<?= $subPage['class'] ?>"<?= $subPage['target'] ?>>
-							<?php endif ?>
-							<?php if (($column['type'] === 'manual_image' || $column['type'] === 'auto_image') && $subPage['rsmm_image']): ?>
-								<?php $this->insert('picture_default', $subPage['rsmm_image']->picture) ?>
-							<?php endif ?>
-							<?= $subPage['link'] ?>
-							<?php if ($subPage['href']): ?>
-								</a>
-							<?php endif ?>
-							</li>
-						<?php endforeach ?>
-					</ul>
+					<?php $this->insert('rsmmnav_default', [
+						'items' => $column['pages'],
+						'type' => $column['type'],
+					]) ?>
 
 				<?php endif ?>
 

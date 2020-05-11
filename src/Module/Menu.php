@@ -126,7 +126,7 @@ class Menu extends \ModuleNavigation
 					$column['pages'] = $this->buildPagesArray($column['pages'], $column['imageSize'], $column['orderPages']);
 				}
 				else if ($column['type'] === 'auto' || $column['type'] === 'auto_image') {
-					$column['pages'] = $this->buildPagesArray($column['page'], $column['imageSize']);
+					$column['pages'] = $this->buildPagesArray($column['page'], $column['imageSize'], null, $column['stopLevel'] ?: 0);
 				}
 				else {
 					$column['pages'] = array();
@@ -140,13 +140,13 @@ class Menu extends \ModuleNavigation
 
 		}
 		else if ($menu->type !== 'html') {
-			$template->pages = $this->buildPagesArray($pid, $menu->imageSize);
+			$template->pages = $this->buildPagesArray($pid, $menu->imageSize, null, $menu->stopLevel);
 		}
 
 		return $template->parse();
 	}
 
-	protected function buildPagesArray($pid, $imageSize, $orderPages = null)
+	protected function buildPagesArray($pid, $imageSize, $orderPages = null, $stopLevel = 0)
 	{
 		$pages = array();
 
@@ -192,8 +192,8 @@ class Menu extends \ModuleNavigation
 
 			$page = $this->getPageData($pagesResult, $imageSize);
 
-			if ($page['subpages'] > 0) {
-				$page['pages'] = $this->buildPagesArray($page['id'], $imageSize);
+			if ($page['subpages'] > 0 && (!$stopLevel || $stopLevel > 1)) {
+				$page['pages'] = $this->buildPagesArray($page['id'], $imageSize, null, $stopLevel ? $stopLevel - 1 : 0);
 			}
 			else {
 				$page['pages'] = array();

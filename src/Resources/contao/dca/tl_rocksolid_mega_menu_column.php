@@ -11,6 +11,14 @@
  *
  * @author Martin Auswöger <martin@madeyourday.net>
  */
+
+if (TL_MODE === 'BE') {
+
+	// Load module language file
+	$this->loadLanguageFile('tl_module');
+
+}
+
 $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 
 	'config' => array(
@@ -85,8 +93,8 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 	'palettes' => array(
 		'__selector__' => array('type'),
 		'default' => '{type_legend},name,type',
-		'auto' => '{type_legend},name,type,displayName;{settings_legend},image,imageSize,text;{navigation_legend},page;{expert_legend},cssClass,cssId;{publish_legend},published,start,stop',
-		'auto_image' => '{type_legend},name,type,displayName;{settings_legend},image,imageSize,text;{navigation_legend},page;{expert_legend},cssClass,cssId;{publish_legend},published,start,stop',
+		'auto' => '{type_legend},name,type,displayName;{settings_legend},image,imageSize,text;{navigation_legend},page,stopLevel;{expert_legend},cssClass,cssId;{publish_legend},published,start,stop',
+		'auto_image' => '{type_legend},name,type,displayName;{settings_legend},image,imageSize,text;{navigation_legend},page,stopLevel;{expert_legend},cssClass,cssId;{publish_legend},published,start,stop',
 		'manual' => '{type_legend},name,type,displayName;{settings_legend},image,imageSize,text;{navigation_legend},page,pages;{expert_legend},cssClass,cssId;{publish_legend},published,start,stop',
 		'manual_image' => '{type_legend},name,type,displayName;{settings_legend},image,imageSize,text;{navigation_legend},page,pages;{expert_legend},cssClass,cssId;{publish_legend},published,start,stop',
 		'image' => '{type_legend},name,type,displayName;{settings_legend},image,imageSize,text;{navigation_legend},page;{expert_legend},cssClass,cssId;{publish_legend},published,start,stop',
@@ -206,6 +214,13 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 				'type' => 'hasOne',
 				'load' => 'eager',
 			),
+		),
+		'stopLevel' => array(
+			'label' => &$GLOBALS['TL_LANG']['tl_module']['showLevel'],
+			'exclude' => true,
+			'inputType' => 'text',
+			'eval' => array('tl_class' => 'w50 clr'),
+			'sql' => "int(10) unsigned NOT NULL default '1'",
 		),
 		'pages' => array(
 			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['pages'],
