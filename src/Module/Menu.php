@@ -282,36 +282,45 @@ class Menu extends \ModuleNavigation
 			return null;
 		}
 
-		$file = new \File($image->path, true);
-		if (!$file->isGdImage && !$file->isImage) {
+		try {
+			$file = new \File($image->path, true);
+			if (!$file->exists()) {
+				return null;
+			}
+		}
+		catch (\Exception $e) {
 			return null;
 		}
-
-		$imageMeta = $this->getMetaData($image->meta, $GLOBALS['objPage']->language);
 
 		if (is_string($size) && trim($size)) {
 			$size = \StringUtil::deserialize($size);
 		}
 		if (!is_array($size)) {
-			$size = array(0, 0, 'center_center');
+			$size = array();
 		}
 		$size[0] = isset($size[0]) ? $size[0] : 0;
 		$size[1] = isset($size[1]) ? $size[1] : 0;
-		$size[2] = isset($size[2]) ? $size[2] : 'center_center';
+		$size[2] = isset($size[2]) ? $size[2] : 'crop';
 
-		$image = array(
+		$imageItem = array(
 			'id' => $image->id,
 			'uuid' => isset($image->uuid) ? $image->uuid : null,
 			'name' => $file->basename,
 			'singleSRC' => $image->path,
-			'size' => serialize($size),
-			'alt' => $imageMeta['title'],
-			'imageUrl' => $imageMeta['link'],
-			'caption' => $imageMeta['caption'],
+			'size' => $size,
 		);
 
-		$imageObject = new \stdClass();
-		$this->addImageToTemplate($imageObject, $image);
+		$imageObject = new \FrontendTemplate('rsce_image_object');
+		$this->addImageToTemplate($imageObject, $imageItem, null, null, $image);
+		$imageObject = (object)$imageObject->getData();
+
+		if (empty($imageObject->src)) {
+			$imageObject->src = $imageObject->singleSRC;
+		}
+
+		$imageObject->id = $image->id;
+		$imageObject->uuid = isset($image->uuid) ? \StringUtil::binToUuid($image->uuid) : null;
+
 		return $imageObject;
 	}
 }
