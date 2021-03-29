@@ -192,7 +192,7 @@ class Menu extends \ModuleNavigation
 
 			$page = $this->getPageData($pagesResult, $imageSize);
 
-			if ($page['subpages'] > 0 && (!$stopLevel || $stopLevel > 1)) {
+			if (!empty($page['subpages']) && (!$stopLevel || $stopLevel > 1)) {
 				$page['pages'] = $this->buildPagesArray($page['id'], $imageSize, null, $stopLevel ? $stopLevel - 1 : 0);
 			}
 			else {
