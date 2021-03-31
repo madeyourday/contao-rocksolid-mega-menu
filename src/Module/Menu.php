@@ -123,7 +123,7 @@ class Menu extends \ModuleNavigation
 				$column['image'] = $this->getImageObject($column['image'], $column['imageSize']);
 
 				if ($column['type'] === 'manual' || $column['type'] === 'manual_image') {
-					$column['pages'] = $this->buildPagesArray($column['pages'], $column['imageSize'], $column['orderPages']);
+					$column['pages'] = $this->buildPagesArray($column['pages'], $column['imageSize'], $column['orderPages'], 1);
 				}
 				else if ($column['type'] === 'auto' || $column['type'] === 'auto_image') {
 					$column['pages'] = $this->buildPagesArray($column['page'], $column['imageSize'], null, $column['stopLevel'] ?: 0);
