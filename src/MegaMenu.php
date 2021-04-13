@@ -49,7 +49,7 @@ class MegaMenu extends \Backend
 		$this->createInitialVersion('tl_rocksolid_mega_menu_column', $intId);
 
 		// Trigger the save_callback
-		if (is_array($GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column']['fields']['published']['save_callback'])) {
+		if (is_array($GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column']['fields']['published']['save_callback'] ?? null)) {
 			foreach ($GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column']['fields']['published']['save_callback'] as $callback) {
 				$this->import($callback[0]);
 				$blnVisible = $this->{$callback[0]}->{$callback[1]}($blnVisible, $this);
