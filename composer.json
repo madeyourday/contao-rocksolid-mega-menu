@@ -18,8 +18,8 @@
 		"source":"https://github.com/madeyourday/contao-rocksolid-mega-menu"
 	},
 	"require":{
-		"php":">=5.5",
-		"contao/core-bundle":"^4.4",
+		"php":">=7.2",
+		"contao/core-bundle":"^4.9",
 		"madeyourday/contao-rocksolid-columns":"^2.0",
 		"madeyourday/contao-rocksolid-slider":"^2.0"
 	},
