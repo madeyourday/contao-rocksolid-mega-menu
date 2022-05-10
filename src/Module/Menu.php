@@ -172,7 +172,7 @@ class Menu extends \ModuleNavigation
 
 		$userGroups = FE_USER_LOGGED_IN
 			? \FrontendUser::getInstance()->groups
-			: array();
+			: array('-1');
 
 		while ($pagesResult->next()) {
 

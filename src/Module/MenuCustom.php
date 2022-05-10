@@ -20,7 +20,7 @@ class MenuCustom extends Menu
 		global $objPage;
 
 		$items = array();
-		$groups = array();
+		$groups = array('-1');
 
 		if (FE_USER_LOGGED_IN) {
 			$this->import('FrontendUser', 'User');
