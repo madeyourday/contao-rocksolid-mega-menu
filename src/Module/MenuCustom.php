@@ -10,6 +10,7 @@ namespace MadeYourDay\RockSolidMegaMenu\Module;
 
 use Contao\Environment;
 use Contao\FrontendTemplate;
+use Contao\FrontendUser;
 use Contao\PageModel;
 use Contao\StringUtil;
 use Contao\System;
@@ -29,7 +30,7 @@ class MenuCustom extends Menu
 		$groups = array('-1');
 
 		if (System::getContainer()->get('contao.security.token_checker')->hasFrontendUser()) {
-			$this->import('FrontendUser', 'User');
+			$this->import(FrontendUser::class, 'User');
 			$groups = $this->User->groups;
 		}
 
