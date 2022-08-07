@@ -8,7 +8,7 @@
 
 namespace MadeYourDay\RockSolidMegaMenu\Model;
 
-use Model;
+use Contao\Model;
 
 /**
  * Mega Menu Model

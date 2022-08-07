@@ -8,6 +8,7 @@
 
 namespace MadeYourDay\RockSolidMegaMenu;
 
+use MadeYourDay\RockSolidMegaMenu\DependencyInjection\RockSolidMegaMenuExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -17,4 +18,11 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class RockSolidMegaMenuBundle extends Bundle
 {
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getContainerExtension()
+	{
+		return new RockSolidMegaMenuExtension();
+	}
 }

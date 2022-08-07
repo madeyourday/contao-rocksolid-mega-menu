@@ -3,14 +3,14 @@
 	<?php foreach ($this->items as $item): ?>
 
 		<?php if ($item['rsmm_enabled']) { $item['class'] .= ' -mega'; } ?>
-		<?php $item['rsmm_color'] = \StringUtil::deserialize($item['rsmm_color']) ?>
+		<?php $item['rsmm_color'] = Contao\StringUtil::deserialize($item['rsmm_color']) ?>
 
 		<li class="<?= $item['class'] ?>">
 
 			<?php if ($item['isActive']): ?>
 				<strong<?php if ($item['rsmm_color'] && $item['rsmm_color'][0]): ?> style="color: #<?= $item['rsmm_color'][0] ?>;"<?php endif ?> class="<?= $item['class'] ?>"<?php if (!empty($item['subitems'])) echo ' aria-haspopup="true"' ?> itemprop="name"><?= $item['link'] ?>
 			<?php else: ?>
-				<a href="<?= $item['href'] ?: './' ?>" title="<?= $item['pageTitle'] ?: $item['title'] ?>" class="<?= $item['class'] ?>"<?php if ($item['accesskey']) echo ' accesskey="' . $item['accesskey'] . '"' ?><?php if ($item['tabindex']) echo ' tabindex="' . $item['tabindex'] . '"' ?><?php if ($item['nofollow']) echo ' rel="nofollow"' ?><?= $item['target'] ?><?php if ($item['rsmm_color'] && $item['rsmm_color'][0]): ?> style="color: #<?= $item['rsmm_color'][0] ?>;"<?php endif ?><?php if (!empty($item['subitems'])) echo ' aria-haspopup="true"' ?> itemprop="url"><span itemprop="name"><?= $item['link'] ?></span>
+				<a href="<?= $item['href'] ?: './' ?>" title="<?= $item['pageTitle'] ?: $item['title'] ?>" class="<?= $item['class'] ?>"<?php if ($item['accesskey']) echo ' accesskey="' . $item['accesskey'] . '"' ?><?php if ($item['nofollow'] ?? null) echo ' rel="nofollow"' ?><?= $item['target'] ?><?php if ($item['rsmm_color'] && $item['rsmm_color'][0]): ?> style="color: #<?= $item['rsmm_color'][0] ?>;"<?php endif ?><?php if (!empty($item['subitems'])) echo ' aria-haspopup="true"' ?> itemprop="url"><span itemprop="name"><?= $item['link'] ?></span>
 			<?php endif ?>
 
 			<?php if ($item['rsmm_subtitle']): ?>

@@ -11,14 +11,19 @@
  *
  * @author Martin Auswöger <martin@madeyourday.net>
  */
+
+use Contao\Controller;
+use Contao\DC_File;
+use Contao\System;
+
 $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_license'] = array(
 
 	'config' => array(
-		'dataContainer' => 'File',
+		'dataContainer' => DC_File::class,
 		'closed' => true,
 		'onsubmit_callback' => array(
 			function() {
-				\Controller::redirect('contao/main.php?do=rocksolid_mega_menu' . (defined('TL_REFERER_ID') ? '&ref=' . TL_REFERER_ID : ''));
+				Controller::redirect('contao?do=rocksolid_mega_menu&ref=' . System::getContainer()->get('request_stack')->getCurrentRequest()->get('_contao_referer_id'));
 			},
 		),
 	),

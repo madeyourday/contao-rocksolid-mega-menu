@@ -12,7 +12,13 @@
  * @author Martin Auswöger <martin@madeyourday.net>
  */
 
-if (TL_MODE === 'BE') {
+use Contao\BackendUser;
+use Contao\Config;
+use Contao\DC_Table;
+use Contao\System;
+use Symfony\Component\HttpFoundation\Request;
+
+if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
 
 	// Load module language file
 	$this->loadLanguageFile('tl_module');
@@ -22,7 +28,7 @@ if (TL_MODE === 'BE') {
 $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 
 	'config' => array(
-		'dataContainer' => 'Table',
+		'dataContainer' => DC_Table::class,
 		'ptable' => 'tl_rocksolid_mega_menu',
 		'enableVersioning' => true,
 		'sql' => array(
@@ -168,7 +174,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 				'files' => true,
 				'filesOnly' => true,
 				'tl_class' => 'clr',
-				'extensions' => \Config::get('validImageTypes'),
+				'extensions' => implode(',', System::getContainer()->getParameter('contao.image.valid_extensions')),
 			),
 			'sql' => "binary(16) NULL",
 		),
@@ -178,7 +184,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 			'inputType' => 'imageSize',
 			'options_callback' => function () {
 				return System::getContainer()
-					->get('contao.image.image_sizes')
+					->get('contao.image.sizes')
 					->getOptionsForUser(BackendUser::getInstance());
 			},
 			'reference' => &$GLOBALS['TL_LANG']['MSC'],
@@ -231,7 +237,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 				'multiple' => true,
 				'fieldType' => 'checkbox',
 				'files' => true,
-				'orderField' => 'orderPages',
+				'isSortable' => true,
 				'mandatory' => true,
 			),
 			'sql' => "blob NULL",
@@ -239,10 +245,6 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 				'type' => 'hasMany',
 				'load' => 'lazy',
 			),
-		),
-		'orderPages' => array(
-			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['orderPages'],
-			'sql' => "blob NULL",
 		),
 		'html' => array(
 			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['html'],

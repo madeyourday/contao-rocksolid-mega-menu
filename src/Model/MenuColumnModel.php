@@ -8,7 +8,8 @@
 
 namespace MadeYourDay\RockSolidMegaMenu\Model;
 
-use Model;
+use Contao\Model;
+use Contao\Model\Collection;
 
 /**
  * Mega Menu Column Model
@@ -29,7 +30,7 @@ class MenuColumnModel extends Model
 	 * @param integer $limit   An optional limit
 	 * @param array   $options An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no columns
+	 * @return Collection|null A collection of models or null if there are no columns
 	 */
 	public static function findPublishedByPid($id, $limit = 0, array $options = array())
 	{

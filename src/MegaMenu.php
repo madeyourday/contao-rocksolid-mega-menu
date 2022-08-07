@@ -8,6 +8,16 @@
 
 namespace MadeYourDay\RockSolidMegaMenu;
 
+use Contao\Backend;
+use Contao\Config;
+use Contao\DataContainer;
+use Contao\Environment;
+use Contao\Image;
+use Contao\Input;
+use Contao\StringUtil;
+use Contao\System;
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * RockSolid MegaMenu DCA
  *
@@ -15,7 +25,7 @@ namespace MadeYourDay\RockSolidMegaMenu;
  *
  * @author Martin Auswöger <martin@madeyourday.net>
  */
-class MegaMenu extends \Backend
+class MegaMenu extends Backend
 {
 	/**
 	 * Return the "toggle visibility" button
@@ -24,21 +34,21 @@ class MegaMenu extends \Backend
 	 */
 	public function toggleColumnIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen(\Input::get('tid'))) {
-			$this->toggleVisibility(\Input::get('tid'), (\Input::get('state') == 1));
-			if (\Environment::get('isAjaxRequest')) {
+		if (strlen(Input::get('tid'))) {
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
+			if (Environment::get('isAjaxRequest')) {
 				exit;
 			}
 			$this->redirect($this->getReferer());
 		}
 
-		$href .= '&amp;id=' . \Input::get('id') . '&amp;tid=' . $row['id'] . '&amp;state=' . ($row['published'] ? '' : 1);
+		$href .= '&amp;id=' . Input::get('id') . '&amp;tid=' . $row['id'] . '&amp;state=' . ($row['published'] ? '' : 1);
 
 		if (! $row['published']) {
 			$icon = 'invisible.gif';
 		}
 
-		return '<a href="' . $this->addToUrl($href) . '" title="' . \StringUtil::specialchars($title) . '"' . $attributes . '>' . \Image::getHtml($icon, $label) . '</a> ';
+		return '<a href="' . $this->addToUrl($href) . '" title="' . StringUtil::specialchars($title) . '"' . $attributes . '>' . Image::getHtml($icon, $label) . '</a> ';
 	}
 
 	/**
@@ -79,7 +89,7 @@ class MegaMenu extends \Backend
 	 * Redirects to the parent menu if no columns are found
 	 *
 	 * @param  array          $headerFields label value pairs of header fields
-	 * @param  \DataContainer $dc           data container
+	 * @param  DataContainer $dc           data container
 	 * @return array
 	 */
 	public function headerCallback($headerFields, $dc)
@@ -87,7 +97,7 @@ class MegaMenu extends \Backend
 		$menusResultSet = $this->Database
 			->prepare('SELECT * FROM ' . $GLOBALS['TL_DCA'][$dc->table]['config']['ptable'] . ' WHERE id = ?')
 			->limit(1)
-			->execute(CURRENT_ID);
+			->execute($dc->currentPid);
 
 		if ($menusResultSet->numRows < 1) {
 			return $headerFields;
@@ -97,9 +107,9 @@ class MegaMenu extends \Backend
 
 			$columnsCount = $this->Database
 				->prepare('SELECT count(*) as count FROM ' . $dc->table . ' WHERE pid = ?')
-				->execute(CURRENT_ID);
+				->execute($dc->currentPid);
 			if (!$columnsCount->count) {
-				$this->redirect('contao/main.php?do=rocksolid_mega_menu&act=edit&id=' . CURRENT_ID . '&ref=' . \Input::get('ref') . '&rt=' . REQUEST_TOKEN);
+				$this->redirect('contao?do=rocksolid_mega_menu&act=edit&id=' . $dc->currentPid . '&ref=' . Input::get('ref') . '&rt=' . System::getContainer()->get('contao.csrf.token_manager')->getDefaultTokenValue());
 			}
 
 		}
@@ -137,13 +147,13 @@ class MegaMenu extends \Backend
 	/**
 	 * Redirect to license page if license key is missing
 	 *
-	 * @param  \DataContainer $dc data container
+	 * @param  DataContainer $dc data container
 	 * @return void
 	 */
 	public function dcaOnloadCallback($dc)
 	{
-		if (TL_MODE === 'BE' && !static::checkLicense()) {
-			$this->redirect('contao/main.php?do=rocksolid_mega_menu&table=tl_rocksolid_mega_menu_license&ref=' . \Input::get('ref'));
+		if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create('')) && !static::checkLicense()) {
+			$this->redirect('contao?do=rocksolid_mega_menu&table=tl_rocksolid_mega_menu_license&ref=' . Input::get('ref'));
 		}
 	}
 
@@ -151,7 +161,7 @@ class MegaMenu extends \Backend
 	 * Check if the license key is valid
 	 *
 	 * @param  string         $value
-	 * @param  \DataContainer $dc
+	 * @param  DataContainer $dc
 	 * @return string         value
 	 */
 	public function licenseSaveCallback($value, $dc)
@@ -179,7 +189,7 @@ class MegaMenu extends \Backend
 	public static function checkLicense($license = null)
 	{
 		if ($license === null) {
-			$license = \Config::get('rocksolid_mega_menu_license');
+			$license = Config::get('rocksolid_mega_menu_license');
 		}
 
 		if (!$license) {

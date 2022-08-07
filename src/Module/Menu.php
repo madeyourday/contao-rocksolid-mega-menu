@@ -8,8 +8,15 @@
 
 namespace MadeYourDay\RockSolidMegaMenu\Module;
 
-use PageModel;
-use FrontendTemplate;
+use Contao\File;
+use Contao\FilesModel;
+use Contao\FrontendTemplate;
+use Contao\FrontendUser;
+use Contao\Input;
+use Contao\ModuleNavigation;
+use Contao\PageModel;
+use Contao\StringUtil;
+use Contao\System;
 use MadeYourDay\RockSolidMegaMenu\Model\MenuModel;
 use MadeYourDay\RockSolidMegaMenu\Model\MenuColumnModel;
 use MadeYourDay\RockSolidColumns\Element\ColumnsStart;
@@ -19,7 +26,7 @@ use MadeYourDay\RockSolidColumns\Element\ColumnsStart;
  *
  * @author Martin Auswöger <martin@madeyourday.net>
  */
-class Menu extends \ModuleNavigation
+class Menu extends ModuleNavigation
 {
 	protected function renderNavigation($pid, $level = 1, $host = null, $language = null)
 	{
@@ -58,7 +65,7 @@ class Menu extends \ModuleNavigation
 
 		$sliderAssetsDir = 'bundles/rocksolidslider';
 
-		if ($menu->slider && file_exists(\System::getContainer()->getParameter('contao.web_dir') . '/' . $sliderAssetsDir . '/js/rocksolid-slider.min.js')) {
+		if ($menu->slider && file_exists(System::getContainer()->getParameter('contao.web_dir') . '/' . $sliderAssetsDir . '/js/rocksolid-slider.min.js')) {
 			$template->slider = true;
 			$options = array(
 				'navType' => $menu->sliderNavType,
@@ -123,10 +130,10 @@ class Menu extends \ModuleNavigation
 				$column['image'] = $this->getImageObject($column['image'], $column['imageSize']);
 
 				if ($column['type'] === 'manual' || $column['type'] === 'manual_image') {
-					$column['pages'] = $this->buildPagesArray($column['pages'], $column['imageSize'], $column['orderPages'], 1);
+					$column['pages'] = $this->buildPagesArray($column['pages'], $column['imageSize'], true, 1);
 				}
 				else if ($column['type'] === 'auto' || $column['type'] === 'auto_image') {
-					$column['pages'] = $this->buildPagesArray($column['page'], $column['imageSize'], null, $column['stopLevel'] ?: 0);
+					$column['pages'] = $this->buildPagesArray($column['page']['id'] ?? $column['page'], $column['imageSize'], false, $column['stopLevel'] ?: 0);
 				}
 				else {
 					$column['pages'] = array();
@@ -140,47 +147,37 @@ class Menu extends \ModuleNavigation
 
 		}
 		else if ($menu->type !== 'html') {
-			$template->pages = $this->buildPagesArray($pid, $menu->imageSize, null, $menu->stopLevel);
+			$template->pages = $this->buildPagesArray($pid, $menu->imageSize, false, $menu->stopLevel);
 		}
 
 		return $template->parse();
 	}
 
-	protected function buildPagesArray($pid, $imageSize, $orderPages = null, $stopLevel = 0)
+	protected function buildPagesArray($pid, $imageSize, $customNav = false, $stopLevel = 0)
 	{
 		$pages = array();
 
-		if ($orderPages !== null) {
-
-			$pagesResult = PageModel::findPublishedRegularWithoutGuestsByIds(\StringUtil::deserialize($pid, true));
-
-			if ($orderPages != '') {
-				$orderPages = \StringUtil::deserialize($orderPages);
-
-				if (!empty($orderPages) && is_array($orderPages)) {
-					$pages = array_map(function(){}, array_flip($orderPages));
-				}
-			}
-
+		if ($customNav) {
+			$pagesResult = PageModel::findPublishedRegularByIds(StringUtil::deserialize($pid, true));
 		}
 		else {
-			$pagesResult = PageModel::findPublishedSubpagesWithoutGuestsByPid($pid, $this->showHidden);
+			$pagesResult = PageModel::findPublishedByPid((int) $pid);
 		}
 		if (!$pagesResult) {
 			return array();
 		}
 
-		$userGroups = FE_USER_LOGGED_IN
-			? \FrontendUser::getInstance()->groups
+		$userGroups = System::getContainer()->get('contao.security.token_checker')->hasFrontendUser()
+			? FrontendUser::getInstance()->groups
 			: array('-1');
 
 		while ($pagesResult->next()) {
 
-			$pageGroups = \StringUtil::deserialize($pagesResult->groups);
+			$pageGroups = StringUtil::deserialize($pagesResult->groups);
 
 			if (
 				$pagesResult->protected
-				&& !BE_USER_LOGGED_IN
+				&& !System::getContainer()->get('contao.security.token_checker')->isPreviewMode()
 				&& (
 					!is_array($pageGroups)
 					|| !count(array_intersect($pageGroups, $userGroups))
@@ -193,7 +190,7 @@ class Menu extends \ModuleNavigation
 			$page = $this->getPageData($pagesResult, $imageSize);
 
 			if (!empty($page['subpages']) && (!$stopLevel || $stopLevel > 1)) {
-				$page['pages'] = $this->buildPagesArray($page['id'], $imageSize, null, $stopLevel ? $stopLevel - 1 : 0);
+				$page['pages'] = $this->buildPagesArray($page['id'], $imageSize, false, $stopLevel ? $stopLevel - 1 : 0);
 			}
 			else {
 				$page['pages'] = array();
@@ -213,7 +210,7 @@ class Menu extends \ModuleNavigation
 		if ($pagesResult->type === 'redirect') {
 			$href = $pagesResult->url;
 			if (strncasecmp($href, 'mailto:', 7) === 0) {
-				$href = \StringUtil::encodeEmail($href);
+				$href = StringUtil::encodeEmail($href);
 			}
 		}
 
@@ -223,7 +220,7 @@ class Menu extends \ModuleNavigation
 				$targetPage = $pagesResult->getRelated('jumpTo');
 			}
 			else {
-				$targetPage = \PageModel::findFirstPublishedRegularByPid($pagesResult->id);
+				$targetPage = PageModel::findFirstPublishedRegularByPid($pagesResult->id);
 			}
 
 			if ($targetPage !== null) {
@@ -237,7 +234,7 @@ class Menu extends \ModuleNavigation
 
 		if (
 			($GLOBALS['objPage']->id == $pagesResult->id || $pagesResult->type == 'forward' && $GLOBALS['objPage']->id == $pagesResult->jumpTo)
-			&& !\Input::get('articles')
+			&& !Input::get('articles')
 		) {
 			$cssClass = (($pagesResult->type == 'forward' && $GLOBALS['objPage']->id == $pagesResult->jumpTo) ? 'forward' . (in_array($pagesResult->id, $GLOBALS['objPage']->trail) ? ' trail' : '') : 'active') . ($pagesResult->protected ? ' protected' : '') . (($pagesResult->cssClass != '') ? ' ' . $pagesResult->cssClass : '');
 			$page['isActive'] = true;
@@ -253,8 +250,8 @@ class Menu extends \ModuleNavigation
 		$page = $pagesResult->row();
 
 		$page['class'] = trim($cssClass);
-		$page['title'] = \StringUtil::specialchars($pagesResult->title, true);
-		$page['pageTitle'] = \StringUtil::specialchars($pagesResult->pageTitle, true);
+		$page['title'] = StringUtil::specialchars($pagesResult->title, true);
+		$page['pageTitle'] = StringUtil::specialchars($pagesResult->pageTitle, true);
 		$page['link'] = $pagesResult->title;
 		$page['href'] = $href ?: './';
 		$page['nofollow'] = (strncmp($pagesResult->robots, 'noindex', 7) === 0);
@@ -277,13 +274,13 @@ class Menu extends \ModuleNavigation
 			return null;
 		}
 
-		$image = \FilesModel::findByUuid($id);
+		$image = FilesModel::findByUuid($id);
 		if (!$image) {
 			return null;
 		}
 
 		try {
-			$file = new \File($image->path, true);
+			$file = new File($image->path, true);
 			if (!$file->exists()) {
 				return null;
 			}
@@ -293,7 +290,7 @@ class Menu extends \ModuleNavigation
 		}
 
 		if (is_string($size) && trim($size)) {
-			$size = \StringUtil::deserialize($size);
+			$size = StringUtil::deserialize($size);
 		}
 		if (!is_array($size)) {
 			$size = array();
@@ -310,7 +307,7 @@ class Menu extends \ModuleNavigation
 			'size' => $size,
 		);
 
-		$imageObject = new \FrontendTemplate('rsce_image_object');
+		$imageObject = new FrontendTemplate('rsce_image_object');
 		$this->addImageToTemplate($imageObject, $imageItem, null, null, $image);
 		$imageObject = (object)$imageObject->getData();
 
@@ -319,7 +316,7 @@ class Menu extends \ModuleNavigation
 		}
 
 		$imageObject->id = $image->id;
-		$imageObject->uuid = isset($image->uuid) ? \StringUtil::binToUuid($image->uuid) : null;
+		$imageObject->uuid = isset($image->uuid) ? StringUtil::binToUuid($image->uuid) : null;
 
 		return $imageObject;
 	}

@@ -8,6 +8,12 @@
 
 namespace MadeYourDay\RockSolidMegaMenu\Module;
 
+use Contao\Environment;
+use Contao\FrontendTemplate;
+use Contao\PageModel;
+use Contao\StringUtil;
+use Contao\System;
+
 /**
  * Custom Menu Frontend Module
  *
@@ -22,12 +28,12 @@ class MenuCustom extends Menu
 		$items = array();
 		$groups = array('-1');
 
-		if (FE_USER_LOGGED_IN) {
+		if (System::getContainer()->get('contao.security.token_checker')->hasFrontendUser()) {
 			$this->import('FrontendUser', 'User');
 			$groups = $this->User->groups;
 		}
 
-		$objPages = \PageModel::findPublishedRegularWithoutGuestsByIds(\StringUtil::deserialize($this->pages, true));
+		$objPages = PageModel::findPublishedRegularWithoutGuestsByIds(StringUtil::deserialize($this->pages, true));
 
 		if ($objPages === null) {
 			return;
@@ -35,29 +41,20 @@ class MenuCustom extends Menu
 
 		$arrPages = array();
 
-		// Sort the array keys according to the given order
-		if ($this->orderPages != '') {
-			$tmp = \StringUtil::deserialize($this->orderPages);
-
-			if (!empty($tmp) && is_array($tmp)) {
-				$arrPages = array_map(function(){}, array_flip($tmp));
-			}
-		}
-
 		if ($this->navigationTpl == '') {
 			$this->navigationTpl = 'nav_default';
 		}
 
-		$objTemplate = new \FrontendTemplate($this->navigationTpl);
+		$objTemplate = new FrontendTemplate($this->navigationTpl);
 
 		$objTemplate->type = get_class($this);
 		$objTemplate->cssID = $this->cssID;
 		$objTemplate->level = 'level_1';
 
 		while ($objPages->next()) {
-			$_groups = \StringUtil::deserialize($arrPage['groups']);
+			$_groups = StringUtil::deserialize($arrPage['groups']);
 
-			if (!$arrPage['protected'] || BE_USER_LOGGED_IN || (is_array($_groups) && count(array_intersect($_groups, $groups))) || $this->showProtected) {
+			if (!$arrPage['protected'] || System::getContainer()->get('contao.security.token_checker')->isPreviewMode() || (is_array($_groups) && count(array_intersect($_groups, $groups))) || $this->showProtected) {
 				$arrPages[$objPages->id] = $this->getPageData($objPages);
 				if ($objPages->rsmm_enabled) {
 					$arrPages[$objPages->id]['subitems'] = $this->renderNavigation($objPages->id);
@@ -75,9 +72,9 @@ class MenuCustom extends Menu
 
 		$objTemplate->items = $items;
 
-		$this->Template->request = \Environment::get('indexFreeRequest');
+		$this->Template->request = Environment::get('indexFreeRequest');
 		$this->Template->skipId = 'skipNavigation' . $this->id;
-		$this->Template->skipNavigation = \StringUtil::specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
+		$this->Template->skipNavigation = StringUtil::specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
 		$this->Template->items = !empty($items) ? $objTemplate->parse() : '';
 	}
 }
