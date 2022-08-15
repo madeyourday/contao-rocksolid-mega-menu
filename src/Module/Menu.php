@@ -274,50 +274,17 @@ class Menu extends ModuleNavigation
 			return null;
 		}
 
-		$image = FilesModel::findByUuid($id);
-		if (!$image) {
+		$figure = System::getContainer()
+			->get('contao.image.studio')
+			->createFigureBuilder()
+			->from($id)
+			->setSize($size)
+			->buildIfResourceExists();
+
+		if (null === $figure) {
 			return null;
 		}
 
-		try {
-			$file = new File($image->path, true);
-			if (!$file->exists()) {
-				return null;
-			}
-		}
-		catch (\Exception $e) {
-			return null;
-		}
-
-		if (is_string($size) && trim($size)) {
-			$size = StringUtil::deserialize($size);
-		}
-		if (!is_array($size)) {
-			$size = array();
-		}
-		$size[0] = isset($size[0]) ? $size[0] : 0;
-		$size[1] = isset($size[1]) ? $size[1] : 0;
-		$size[2] = isset($size[2]) ? $size[2] : 'crop';
-
-		$imageItem = array(
-			'id' => $image->id,
-			'uuid' => isset($image->uuid) ? $image->uuid : null,
-			'name' => $file->basename,
-			'singleSRC' => $image->path,
-			'size' => $size,
-		);
-
-		$imageObject = new FrontendTemplate('rsce_image_object');
-		$this->addImageToTemplate($imageObject, $imageItem, null, null, $image);
-		$imageObject = (object)$imageObject->getData();
-
-		if (empty($imageObject->src)) {
-			$imageObject->src = $imageObject->singleSRC;
-		}
-
-		$imageObject->id = $image->id;
-		$imageObject->uuid = isset($image->uuid) ? StringUtil::binToUuid($image->uuid) : null;
-
-		return $imageObject;
+		return (object) $figure->getLegacyTemplateData();
 	}
 }
