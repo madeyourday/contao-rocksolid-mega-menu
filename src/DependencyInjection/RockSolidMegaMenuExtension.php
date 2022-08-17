@@ -23,7 +23,7 @@ class RockSolidMegaMenuExtension extends Extension
 	/**
 	 * {@inheritdoc}
 	 */
-	public function getAlias()
+	public function getAlias(): string
 	{
 		return 'rocksolid_mega_menu';
 	}

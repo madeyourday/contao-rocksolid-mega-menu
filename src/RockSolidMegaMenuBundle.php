@@ -9,6 +9,7 @@
 namespace MadeYourDay\RockSolidMegaMenu;
 
 use MadeYourDay\RockSolidMegaMenu\DependencyInjection\RockSolidMegaMenuExtension;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -21,7 +22,7 @@ class RockSolidMegaMenuBundle extends Bundle
 	/**
 	 * {@inheritdoc}
 	 */
-	public function getContainerExtension()
+	public function getContainerExtension(): ?ExtensionInterface
 	{
 		return new RockSolidMegaMenuExtension();
 	}
