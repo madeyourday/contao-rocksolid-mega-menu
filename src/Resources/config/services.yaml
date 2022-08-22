@@ -5,3 +5,7 @@ services:
   MadeYourDay\RockSolidMegaMenu\Migration\BasicEntitiesMigration:
     arguments:
       - '@database_connection'
+
+  MadeYourDay\RockSolidMegaMenu\Migration\OrderFieldMigration:
+    arguments:
+      - '@database_connection'
