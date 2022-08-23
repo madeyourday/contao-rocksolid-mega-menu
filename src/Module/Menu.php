@@ -159,9 +159,21 @@ class Menu extends ModuleNavigation
 
 		if ($customNav) {
 			$pagesResult = PageModel::findPublishedRegularByIds(StringUtil::deserialize($pid, true));
+			if ($pagesResult) {
+				$pagesResult = array_map(
+					static function ($page): array
+					{
+						return array(
+							'page' => $page,
+							'hasSubpages' => false,
+						);
+					},
+					$pagesResult->getModels()
+				);
+			}
 		}
 		else {
-			$pagesResult = PageModel::findPublishedByPid((int) $pid);
+			$pagesResult = static::getPublishedSubpagesByPid((int) $pid, $this->showHidden);
 		}
 		if (!$pagesResult) {
 			return array();
@@ -171,12 +183,12 @@ class Menu extends ModuleNavigation
 			? FrontendUser::getInstance()->groups
 			: array('-1');
 
-		while ($pagesResult->next()) {
+		foreach ($pagesResult as ['page' => $subpage, 'hasSubpages' => $hasSubpages]) {
 
-			$pageGroups = StringUtil::deserialize($pagesResult->groups);
+			$pageGroups = StringUtil::deserialize($subpage->groups);
 
 			if (
-				$pagesResult->protected
+				$subpage->protected
 				&& !System::getContainer()->get('contao.security.token_checker')->isPreviewMode()
 				&& (
 					!is_array($pageGroups)
@@ -187,9 +199,9 @@ class Menu extends ModuleNavigation
 				continue;
 			}
 
-			$page = $this->getPageData($pagesResult, $imageSize);
+			$page = $this->getPageData($subpage, $imageSize);
 
-			if (!empty($page['subpages']) && (!$stopLevel || $stopLevel > 1)) {
+			if ($hasSubpages && (!$stopLevel || $stopLevel > 1)) {
 				$page['pages'] = $this->buildPagesArray($page['id'], $imageSize, false, $stopLevel ? $stopLevel - 1 : 0);
 			}
 			else {
