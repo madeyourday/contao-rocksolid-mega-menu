@@ -61,7 +61,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 				'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['editLicense'],
 				'href' => 'table=tl_rocksolid_mega_menu_license',
 				'class' => 'header_icon',
-				'icon' => 'system/themes/' . Backend::getTheme() . '/images/settings.gif',
+				'icon' => 'modules_.svg',
 			),
 			'all' => array(
 				'label' => &$GLOBALS['TL_LANG']['MSC']['all'],
@@ -74,13 +74,13 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 			'edit' => array(
 				'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['edit'],
 				'href' => 'table=tl_rocksolid_mega_menu_column',
-				'icon' => 'edit.gif',
+				'icon' => version_compare(\Contao\CoreBundle\ContaoCoreBundle::getVersion(), '5.0', '<') ? 'edit.svg' : 'children.svg',
 				'attributes' => 'class="contextmenu"',
 			),
 			'editheader' => array(
 				'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['editheader'],
 				'href' => 'act=edit',
-				'icon' => 'header.gif',
+				'icon' => version_compare(\Contao\CoreBundle\ContaoCoreBundle::getVersion(), '5.0', '<') ? 'header.svg' : 'edit.svg',
 				'attributes' => 'class="edit-header"',
 			),
 			'copy' => array(
