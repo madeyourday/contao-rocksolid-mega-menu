@@ -84,9 +84,9 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 			),
 			'toggle' => array(
 				'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['toggle'],
+				'href' => 'act=toggle&amp;field=published',
 				'icon' => 'visible.gif',
-				'attributes' => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-				'button_callback' => array('MadeYourDay\\RockSolidMegaMenu\\MegaMenu', 'toggleColumnIcon'),
+				'button_callback' => array('MadeYourDay\\RockSolidSlider\\Slider', 'toggleSlideIcon'),
 			),
 			'show' => array(
 				'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['show'],
@@ -281,6 +281,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['published'],
 			'exclude' => true,
 			'filter' => true,
+			'toggle' => true,
 			'flag' => 1,
 			'inputType' => 'checkbox',
 			'eval' => array('doNotCopy'=>true),
