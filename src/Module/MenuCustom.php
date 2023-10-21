@@ -34,7 +34,7 @@ class MenuCustom extends Menu
 			$groups = $this->User->groups;
 		}
 
-		$objPages = PageModel::findPublishedRegularWithoutGuestsByIds(StringUtil::deserialize($this->pages, true));
+		$objPages = PageModel::findPublishedRegularByIds(StringUtil::deserialize($this->pages, true));
 
 		if ($objPages === null) {
 			return;
@@ -53,9 +53,9 @@ class MenuCustom extends Menu
 		$objTemplate->level = 'level_1';
 
 		while ($objPages->next()) {
-			$_groups = StringUtil::deserialize($arrPage['groups']);
+			$_groups = StringUtil::deserialize($objPages->groups);
 
-			if (!$arrPage['protected'] || System::getContainer()->get('contao.security.token_checker')->isPreviewMode() || (is_array($_groups) && count(array_intersect($_groups, $groups))) || $this->showProtected) {
+			if (!$objPages->protected || System::getContainer()->get('contao.security.token_checker')->isPreviewMode() || (is_array($_groups) && count(array_intersect($_groups, $groups))) || $this->showProtected) {
 				$arrPages[$objPages->id] = $this->getPageData($objPages);
 				if ($objPages->rsmm_enabled) {
 					$arrPages[$objPages->id]['subitems'] = $this->renderNavigation($objPages->id);
