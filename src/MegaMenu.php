@@ -79,7 +79,7 @@ class MegaMenu extends Backend
 				->prepare('SELECT count(*) as count FROM ' . $dc->table . ' WHERE pid = ?')
 				->execute($dc->currentPid);
 			if (!$columnsCount->count) {
-				$this->redirect('contao?do=rocksolid_mega_menu&act=edit&id=' . $dc->currentPid . '&ref=' . Input::get('ref') . '&rt=' . System::getContainer()->get('contao.csrf.token_manager')->getDefaultTokenValue());
+				$this->redirect(System::getContainer()->get('router')->generate('contao_backend', ['do' => 'rocksolid_mega_menu', 'act' => 'edit', 'id' => $dc->currentPid, 'ref' => Input::get('ref'), 'rt' => System::getContainer()->get('contao.csrf.token_manager')->getDefaultTokenValue()]));
 			}
 
 		}
@@ -123,7 +123,7 @@ class MegaMenu extends Backend
 	public function dcaOnloadCallback($dc)
 	{
 		if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create('')) && !static::checkLicense()) {
-			$this->redirect('contao?do=rocksolid_mega_menu&table=tl_rocksolid_mega_menu_license&ref=' . Input::get('ref'));
+			$this->redirect(System::getContainer()->get('router')->generate('contao_backend', ['do' => 'rocksolid_mega_menu', 'table' => 'tl_rocksolid_mega_menu_license', 'ref' => Input::get('ref')]));
 		}
 	}
 
