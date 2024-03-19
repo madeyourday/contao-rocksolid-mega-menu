@@ -7,7 +7,7 @@
 
 		<li class="<?= $item['class'] ?>">
 
-			<?php if ($item['isActive']): ?>
+			<?php if ($item['isActive'] ?? null): ?>
 				<strong<?php if ($item['rsmm_color'] && $item['rsmm_color'][0]): ?> style="color: #<?= $item['rsmm_color'][0] ?>;"<?php endif ?> class="<?= $item['class'] ?>"<?php if (!empty($item['subitems'])) echo ' aria-haspopup="true"' ?> itemprop="name"><?= $item['link'] ?>
 			<?php else: ?>
 				<a href="<?= $item['href'] ?: './' ?>" title="<?= $item['pageTitle'] ?: $item['title'] ?>" class="<?= $item['class'] ?>"<?php if ($item['accesskey']) echo ' accesskey="' . $item['accesskey'] . '"' ?><?php if ($item['nofollow'] ?? null) echo ' rel="nofollow"' ?><?= $item['target'] ?><?php if ($item['rsmm_color'] && $item['rsmm_color'][0]): ?> style="color: #<?= $item['rsmm_color'][0] ?>;"<?php endif ?><?php if (!empty($item['subitems'])) echo ' aria-haspopup="true"' ?> itemprop="url"><span itemprop="name"><?= $item['link'] ?></span>
@@ -17,13 +17,13 @@
 				<small><?= $item['rsmm_subtitle'] ?></small>
 			<?php endif ?>
 
-			<?php if ($item['isActive']): ?>
+			<?php if ($item['isActive'] ?? null): ?>
 				</strong>
 			<?php else: ?>
 				</a>
 			<?php endif ?>
 
-			<?= $item['subitems'] ?>
+			<?= $item['subitems'] ?? '' ?>
 
 		</li>
 
