@@ -31,7 +31,7 @@ class Menu extends ModuleNavigation
 	protected function renderNavigation($pid, $level = 1, $host = null, $language = null)
 	{
 		$parentPage = PageModel::findByPk($pid);
-		if (!$parentPage->rsmm_enabled || !$parentPage->rsmm_id) {
+		if ($level < 2 || !$parentPage->rsmm_enabled || !$parentPage->rsmm_id) {
 			return parent::renderNavigation($pid, $level, $host, $language);
 		}
 
