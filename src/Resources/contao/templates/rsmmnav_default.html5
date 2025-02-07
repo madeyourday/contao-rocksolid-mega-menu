@@ -8,6 +8,9 @@
 			<?php $this->insert('picture_default', $subPage['rsmm_image']->picture) ?>
 		<?php endif ?>
 		<?= $subPage['link'] ?>
+		<?php if ($subPage['rsmm_subtitle']): ?>
+			<small><?= $subPage['rsmm_subtitle'] ?></small>
+		<?php endif ?>
 		<?php if ($subPage['href']): ?>
 			</a>
 		<?php endif ?>
