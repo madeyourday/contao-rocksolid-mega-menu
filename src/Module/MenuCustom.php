@@ -58,7 +58,7 @@ class MenuCustom extends Menu
 			if (!$objPages->protected || System::getContainer()->get('contao.security.token_checker')->isPreviewMode() || (is_array($_groups) && count(array_intersect($_groups, $groups))) || $this->showProtected) {
 				$arrPages[$objPages->id] = $this->getPageData($objPages);
 				if ($objPages->rsmm_enabled) {
-					$arrPages[$objPages->id]['subitems'] = $this->renderNavigation($objPages->id);
+					$arrPages[$objPages->id]['subitems'] = $this->renderNavigation($objPages->id, 2);
 				}
 			}
 
