@@ -15,8 +15,12 @@
 $GLOBALS['TL_LANG']['tl_page']['rocksolid_mega_menu_legend'] = 'Mega-Menu-Einstellungen';
 $GLOBALS['TL_LANG']['tl_page']['rsmm_subtitle'][0] = 'Untertitel';
 $GLOBALS['TL_LANG']['tl_page']['rsmm_subtitle'][1] = 'Untertitel der Seite.';
+$GLOBALS['TL_LANG']['tl_page']['rsmm_badge'][0] = 'Etikett';
+$GLOBALS['TL_LANG']['tl_page']['rsmm_badge'][1] = 'Etikett für die Anzeige in der Hauptnavigation.';
 $GLOBALS['TL_LANG']['tl_page']['rsmm_color'][0] = 'Farbe';
 $GLOBALS['TL_LANG']['tl_page']['rsmm_color'][1] = 'Hier können Sie eine hexadezimale Farbe (z.B. ff0000 für rot) sowie optional die Deckkraft in Prozent (z.B. 75) eingeben.';
+$GLOBALS['TL_LANG']['tl_page']['rsmm_icon'][0] = 'Icon';
+$GLOBALS['TL_LANG']['tl_page']['rsmm_icon'][1] = 'Wählen Sie ein Icon, das für diese Seite in der Navigation angezeigt wird.';
 $GLOBALS['TL_LANG']['tl_page']['rsmm_image'][0] = 'Bild';
 $GLOBALS['TL_LANG']['tl_page']['rsmm_image'][1] = 'Wählen Sie ein Bild, das für diese Seite im Mega Menu angezeigt wird.';
 $GLOBALS['TL_LANG']['tl_page']['rsmm_enabled'][0] = 'Mega Menu aktivieren';

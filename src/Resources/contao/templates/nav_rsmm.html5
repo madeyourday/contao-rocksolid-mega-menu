@@ -17,6 +17,14 @@
 				<small><?= $item['rsmm_subtitle'] ?></small>
 			<?php endif ?>
 
+			<?php if ($item['rsmm_badge']): ?>
+				<em><?= $item['rsmm_badge'] ?></em>
+			<?php endif ?>
+
+			<?php if ($item['rsmm_icon']): ?>
+				<?= $this->figure($item['rsmm_icon'], '') ?>
+			<?php endif ?>
+
 			<?php if ($item['isActive'] ?? null): ?>
 				</strong>
 			<?php else: ?>

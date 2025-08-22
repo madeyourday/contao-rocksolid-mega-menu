@@ -12,14 +12,23 @@
  * @author Martin Auswöger <martin@madeyourday.net>
  */
 
-$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace(';{layout_legend', ';{rocksolid_mega_menu_legend:hide},rsmm_subtitle,rsmm_color,rsmm_image,rsmm_enabled;{layout_legend', $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
-$GLOBALS['TL_DCA']['tl_page']['palettes']['forward'] = str_replace(';{layout_legend', ';{rocksolid_mega_menu_legend:hide},rsmm_subtitle,rsmm_color,rsmm_image,rsmm_enabled;{layout_legend', $GLOBALS['TL_DCA']['tl_page']['palettes']['forward']);
-$GLOBALS['TL_DCA']['tl_page']['palettes']['redirect'] = str_replace(';{layout_legend', ';{rocksolid_mega_menu_legend:hide},rsmm_subtitle,rsmm_color,rsmm_image,rsmm_enabled;{layout_legend', $GLOBALS['TL_DCA']['tl_page']['palettes']['redirect']);
+$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace(';{layout_legend', ';{rocksolid_mega_menu_legend:hide},rsmm_subtitle,rsmm_badge,rsmm_color,rsmm_icon,rsmm_image,rsmm_enabled;{layout_legend', $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
+$GLOBALS['TL_DCA']['tl_page']['palettes']['forward'] = str_replace(';{layout_legend', ';{rocksolid_mega_menu_legend:hide},rsmm_subtitle,rsmm_badge,rsmm_color,rsmm_icon,rsmm_image,rsmm_enabled;{layout_legend', $GLOBALS['TL_DCA']['tl_page']['palettes']['forward']);
+$GLOBALS['TL_DCA']['tl_page']['palettes']['redirect'] = str_replace(';{layout_legend', ';{rocksolid_mega_menu_legend:hide},rsmm_subtitle,rsmm_badge,rsmm_color,rsmm_icon,rsmm_image,rsmm_enabled;{layout_legend', $GLOBALS['TL_DCA']['tl_page']['palettes']['redirect']);
 $GLOBALS['TL_DCA']['tl_page']['palettes']['__selector__'][] = 'rsmm_enabled';
 $GLOBALS['TL_DCA']['tl_page']['subpalettes']['rsmm_enabled'] = 'rsmm_id';
 
 $GLOBALS['TL_DCA']['tl_page']['fields']['rsmm_subtitle'] = array(
 	'label' => &$GLOBALS['TL_LANG']['tl_page']['rsmm_subtitle'],
+	'exclude' => true,
+	'inputType' => 'text',
+	'eval' => array(
+		'tl_class' => 'w50',
+	),
+	'sql' => "varchar(255) NOT NULL default ''",
+);
+$GLOBALS['TL_DCA']['tl_page']['fields']['rsmm_badge'] = array(
+	'label' => &$GLOBALS['TL_LANG']['tl_page']['rsmm_badge'],
 	'exclude' => true,
 	'inputType' => 'text',
 	'eval' => array(
@@ -42,6 +51,18 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['rsmm_color'] = array(
 	),
 	'sql' => "varchar(64) NOT NULL default ''",
 );
+$GLOBALS['TL_DCA']['tl_page']['fields']['rsmm_icon'] = array(
+	'label' => &$GLOBALS['TL_LANG']['tl_page']['rsmm_icon'],
+	'exclude' => true,
+	'inputType' => 'fileTree',
+	'eval' => array(
+		'fieldType' => 'radio',
+		'filesOnly' => true,
+		'extensions' => '%contao.image.valid_extensions%',
+		'tl_class' => 'clr',
+	),
+	'sql' => "binary(16) NULL",
+);
 $GLOBALS['TL_DCA']['tl_page']['fields']['rsmm_image'] = array(
 	'label' => &$GLOBALS['TL_LANG']['tl_page']['rsmm_image'],
 	'exclude' => true,
@@ -49,7 +70,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['rsmm_image'] = array(
 	'eval' => array(
 		'fieldType' => 'radio',
 		'filesOnly' => true,
-		'extensions' => 'jpg,jpeg,png,gif,svg',
+		'extensions' => '%contao.image.valid_extensions%',
 		'tl_class' => 'clr',
 	),
 	'sql' => "binary(16) NULL",
