@@ -44,7 +44,7 @@ class OrderFieldMigration extends AbstractMigration
                 continue;
             }
 
-            $columns = $schemaManager->listTableColumns($table);
+            $columns = $schemaManager->listTableColumns([$table]);
 
             foreach ($fields as $orderField => $field) {
                 if (isset($columns[strtolower($orderField)], $columns[strtolower($field)])) {
