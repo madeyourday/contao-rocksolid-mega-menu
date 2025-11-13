@@ -20,7 +20,7 @@
 	"require":{
 		"php":">=7.4",
 		"contao/core-bundle":"^4.13 || ^5.0",
-		"madeyourday/contao-rocksolid-columns":"^2.0",
+		"madeyourday/contao-rocksolid-columns":"dev-develop-v3",
 		"madeyourday/contao-rocksolid-slider":"^2.0"
 	},
 	"require-dev": {

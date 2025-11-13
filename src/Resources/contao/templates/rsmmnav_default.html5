@@ -7,7 +7,13 @@
 		<?php if (($this->type === 'manual_image' || $this->type === 'auto_image') && $subPage['rsmm_image']): ?>
 			<?php $this->insert('picture_default', $subPage['rsmm_image']->picture) ?>
 		<?php endif ?>
+		<?php if ($subPage['rsmm_icon']): ?>
+			<?php $this->insert('picture_default', $subPage['rsmm_icon']->picture) ?>
+		<?php endif ?>
 		<?= $subPage['link'] ?>
+		<?php if ($subPage['rsmm_badge']): ?>
+			<em><?= $subPage['rsmm_badge'] ?></em>
+		<?php endif ?>
 		<?php if ($subPage['rsmm_subtitle']): ?>
 			<small><?= $subPage['rsmm_subtitle'] ?></small>
 		<?php endif ?>

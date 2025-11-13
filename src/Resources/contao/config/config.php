@@ -21,6 +21,7 @@ Contao\ArrayUtil::arrayInsert($GLOBALS['BE_MOD']['design'], 2, array(
 			'tl_rocksolid_mega_menu',
 			'tl_rocksolid_mega_menu_column',
 			'tl_rocksolid_mega_menu_license',
+			'tl_content',
 		),
 		'icon' => 'bundles/rocksolidmegamenu/img/icon.png',
 	),

@@ -15,8 +15,8 @@
 $GLOBALS['TL_LANG']['tl_page']['rocksolid_mega_menu_legend'] = 'Mega Menu Settings';
 $GLOBALS['TL_LANG']['tl_page']['rsmm_subtitle'][0] = 'Subtitle';
 $GLOBALS['TL_LANG']['tl_page']['rsmm_subtitle'][1] = 'Subtitle of the page.';
-$GLOBALS['TL_LANG']['tl_page']['rsmm_badge'][0] = 'Badge';
-$GLOBALS['TL_LANG']['tl_page']['rsmm_badge'][1] = 'Badge for display in the main navigation.';
+$GLOBALS['TL_LANG']['tl_page']['rsmm_badge'][0] = 'Tag (Badge)';
+$GLOBALS['TL_LANG']['tl_page']['rsmm_badge'][1] = 'Tag for display in the main navigation.';
 $GLOBALS['TL_LANG']['tl_page']['rsmm_color'][0] = 'Color';
 $GLOBALS['TL_LANG']['tl_page']['rsmm_color'][1] = 'Here you can enter a hexadecimal color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).';
 $GLOBALS['TL_LANG']['tl_page']['rsmm_icon'][0] = 'Icon';

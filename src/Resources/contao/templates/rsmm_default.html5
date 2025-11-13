@@ -1,5 +1,5 @@
 <div class="mega-dropdown <?= $this->level ?> <?= $this->cssClass ?>"<?php if ($this->cssId): ?> id="<?= $this->cssId ?>"<?php endif ?><?php if ($this->backgroundStyle): ?> style="<?= $this->backgroundStyle ?>"<?php endif ?>>
-<div class="mega-dropdown-inner">
+<div class="mega-dropdown-inner <?= $this->columnsWrapperClass ?>">
 
 	<?php if ($this->slider): ?>
 		<div class="mega-dropdown-slider">
@@ -115,7 +115,7 @@
 
 				<?php endif ?>
 
-				<?php if ($column['type'] === 'html'): ?>
+				<?php if ($column['type'] === 'html' || $column['type'] === 'content'): ?>
 					<?= $column['html'] ?>
 				<?php endif ?>
 

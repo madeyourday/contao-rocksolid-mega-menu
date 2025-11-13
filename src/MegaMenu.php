@@ -44,6 +44,18 @@ class MegaMenu extends Backend
 	}
 
 	/**
+	 * Return the "edit column" button
+	 */
+	public function editColumnIcon($row, $href, $label, $title, $icon, $attributes)
+	{
+		if ($row['type'] !== 'content') {
+			return '';
+		}
+		$href .= '&amp;id=' . $row['id'];
+		return '<a href="' . $this->addToUrl($href) . '" title="' . StringUtil::specialchars($title) . '"' . $attributes . '>' . Image::getHtml($icon, $label) . '</a> ';
+	}
+
+	/**
 	 * Child record callback
 	 *
 	 * @return string

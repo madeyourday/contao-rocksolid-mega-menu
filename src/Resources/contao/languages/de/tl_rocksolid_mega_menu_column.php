@@ -40,6 +40,7 @@ $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['types']['manual_image'] = 
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['types']['image'] = 'Bild-Link';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['types']['link'] = 'Link';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['types']['html'] = 'Eigener HTML-Code';
+$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['types']['content'] = 'Inhaltselemente';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['name'][0] = 'Name';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['name'][1] = '';
 $GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['type'][0] = 'Typ';

@@ -30,6 +30,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 	'config' => array(
 		'dataContainer' => DC_Table::class,
 		'ptable' => 'tl_rocksolid_mega_menu',
+		'ctable' => array('tl_content'),
 		'enableVersioning' => true,
 		'sql' => array(
 			'keys' => array(
@@ -62,8 +63,16 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 		),
 		'operations' => array(
 			'edit' => array(
+				'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['edit'],
+				'href' => 'table=tl_content&ptable=tl_rocksolid_mega_menu_column',
+				'icon' => version_compare(\Contao\CoreBundle\ContaoCoreBundle::getVersion(), '5.0', '<') ? 'edit.svg' : 'children.svg',
+				'attributes' => 'class="contextmenu"',
+				'button_callback' => array('MadeYourDay\\RockSolidMegaMenu\\MegaMenu', 'editColumnIcon'),
+			),
+			'editheader' => array(
 				'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['edit'],
 				'href' => 'act=edit',
+				'icon' => version_compare(\Contao\CoreBundle\ContaoCoreBundle::getVersion(), '5.0', '<') ? 'header.svg' : 'edit.svg',
 				'icon' => 'edit.gif',
 			),
 			'copy' => array(
@@ -86,7 +95,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 				'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['toggle'],
 				'href' => 'act=toggle&amp;field=published',
 				'icon' => 'visible.gif',
-				'button_callback' => array('MadeYourDay\\RockSolidSlider\\Slider', 'toggleSlideIcon'),
+				'button_callback' => array('MadeYourDay\\RockSolidMegaMenu\\MegaMenu', 'toggleColumnIcon'),
 			),
 			'show' => array(
 				'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['show'],
@@ -106,6 +115,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 		'image' => '{type_legend},name,type,displayName;{settings_legend},image,imageSize,text;{navigation_legend},page;{expert_legend},cssClass,cssId;{publish_legend},published,start,stop',
 		'link' => '{type_legend},name,type;{navigation_legend},page;{expert_legend},cssClass,cssId;{publish_legend},published,start,stop',
 		'html' => '{type_legend},name,type,displayName;{settings_legend},html;{expert_legend},cssClass,cssId;{publish_legend},published,start,stop',
+		'content' => '{type_legend},name,type,displayName;{expert_legend},cssClass,cssId;{publish_legend},published,start,stop',
 	),
 
 	'fields' => array(
@@ -145,6 +155,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 				'image',
 				'link',
 				'html',
+				'content',
 			),
 			'reference' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu_column']['types'],
 			'eval' => array(

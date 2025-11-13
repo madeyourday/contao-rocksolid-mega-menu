@@ -25,6 +25,7 @@ if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendReques
 
 	// Load module language file
 	$this->loadLanguageFile('tl_module');
+	$this->loadLanguageFile('tl_content');
 
 }
 
@@ -105,9 +106,9 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 	'palettes' => array(
 		'__selector__' => array('type'),
 		'default' => '{type_legend},name,type',
-		'auto' => '{type_legend},name,type;{rs_columns_legend},rs_columns_large,rs_columns_medium,rs_columns_small;{slider_legend},slider,sliderNavType,sliderControls,sliderSkin,sliderGapSize,sliderMaxCount,sliderMinSize,sliderPrevNextSteps,sliderLoop;{settings_legend},imageSize,stopLevel;{background_legend},backgroundImage,backgroundImageSize,backgroundSize,backgroundPosition,backgroundRepeat;{expert_legend},cssClass,cssId',
-		'auto_images' => '{type_legend},name,type;{rs_columns_legend},rs_columns_large,rs_columns_medium,rs_columns_small;{slider_legend},slider,sliderNavType,sliderControls,sliderSkin,sliderGapSize,sliderMaxCount,sliderMinSize,sliderPrevNextSteps,sliderLoop;{settings_legend},imageSize,stopLevel;{background_legend},backgroundImage,backgroundImageSize,backgroundSize,backgroundPosition,backgroundRepeat;{expert_legend},cssClass,cssId',
-		'manual' => '{type_legend},name,type;{rs_columns_legend},rs_columns_large,rs_columns_medium,rs_columns_small;{slider_legend},slider,sliderNavType,sliderControls,sliderSkin,sliderGapSize,sliderMaxCount,sliderMinSize,sliderPrevNextSteps,sliderLoop;{background_legend},backgroundImage,backgroundImageSize,backgroundSize,backgroundPosition,backgroundRepeat;{expert_legend},cssClass,cssId',
+		'auto' => '{type_legend},name,type;{rs_columns_legend},rs_columns_xlarge,rs_columns_large,rs_columns_medium,rs_columns_small,rs_columns_xsmall,rs_columns_gutter,rs_columns_outside_gutters,rs_columns_align;{slider_legend},slider,sliderNavType,sliderControls,sliderSkin,sliderGapSize,sliderMaxCount,sliderMinSize,sliderPrevNextSteps,sliderLoop;{settings_legend},imageSize,stopLevel;{background_legend},backgroundImage,backgroundImageSize,backgroundSize,backgroundPosition,backgroundRepeat;{expert_legend},cssClass,cssId',
+		'auto_images' => '{type_legend},name,type;{rs_columns_legend},rs_columns_xlarge,rs_columns_large,rs_columns_medium,rs_columns_small,rs_columns_xsmall,rs_columns_gutter,rs_columns_outside_gutters,rs_columns_align;{slider_legend},slider,sliderNavType,sliderControls,sliderSkin,sliderGapSize,sliderMaxCount,sliderMinSize,sliderPrevNextSteps,sliderLoop;{settings_legend},imageSize,stopLevel;{background_legend},backgroundImage,backgroundImageSize,backgroundSize,backgroundPosition,backgroundRepeat;{expert_legend},cssClass,cssId',
+		'manual' => '{type_legend},name,type;{rs_columns_legend},rs_columns_xlarge,rs_columns_large,rs_columns_medium,rs_columns_small,rs_columns_xsmall,rs_columns_gutter,rs_columns_outside_gutters,rs_columns_align;{slider_legend},slider,sliderNavType,sliderControls,sliderSkin,sliderGapSize,sliderMaxCount,sliderMinSize,sliderPrevNextSteps,sliderLoop;{background_legend},backgroundImage,backgroundImageSize,backgroundSize,backgroundPosition,backgroundRepeat;{expert_legend},cssClass,cssId',
 		'html' => '{type_legend},name,type;{html_legend},html;{background_legend},backgroundImage,backgroundImageSize,backgroundSize,backgroundPosition,backgroundRepeat;{expert_legend},cssClass,cssId',
 	),
 
@@ -148,31 +149,81 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 			),
 			'sql' => "varchar(32) NOT NULL default ''",
 		),
+		'rs_columns_xlarge' => array(
+			'inputType' => 'text',
+			'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_xlarge'],
+			'exclude' => true,
+			'eval' => array(
+				'tl_class' => 'rs_columns_w20 clr',
+			),
+			'sql' => "varchar(255) NOT NULL default ''",
+		),
 		'rs_columns_large' => array(
 			'inputType' => 'text',
+			'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_large'],
 			'exclude' => true,
-			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['rs_columns_large'],
 			'eval' => array(
-				'mandatory' => true,
-				'tl_class' => 'rs_columns_w33',
+				'tl_class' => 'rs_columns_w20',
 			),
 			'sql' => "varchar(255) NOT NULL default ''",
 		),
 		'rs_columns_medium' => array(
 			'inputType' => 'text',
+			'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_medium'],
 			'exclude' => true,
-			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['rs_columns_medium'],
 			'eval' => array(
-				'tl_class' => 'rs_columns_w33',
+				'tl_class' => 'rs_columns_w20',
 			),
 			'sql' => "varchar(255) NOT NULL default ''",
 		),
 		'rs_columns_small' => array(
 			'inputType' => 'text',
+			'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_small'],
 			'exclude' => true,
-			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['rs_columns_small'],
 			'eval' => array(
-				'tl_class' => 'rs_columns_w33',
+				'tl_class' => 'rs_columns_w20',
+			),
+			'sql' => "varchar(255) NOT NULL default ''",
+		),
+		'rs_columns_xsmall' => array(
+			'inputType' => 'text',
+			'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_xsmall'],
+			'exclude' => true,
+			'eval' => array(
+				'tl_class' => 'rs_columns_w20',
+			),
+			'sql' => "varchar(255) NOT NULL default ''",
+		),
+		'rs_columns_gutter' => array(
+			'inputType' => 'select',
+			'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_gutter'],
+			'exclude' => true,
+			'options' => array('none', 's', 'm', 'l', 'h'),
+			'reference' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_gutters'],
+			'eval' => array(
+				'includeBlankOption' => true,
+				'tl_class' => 'clr w25',
+			),
+			'sql' => "varchar(255) NOT NULL default ''",
+		),
+		'rs_columns_outside_gutters' => array(
+			'inputType' => 'checkbox',
+			'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_outside_gutters'],
+			'exclude' => true,
+			'eval' => array(
+				'tl_class' => 'w25 m12',
+			),
+			'sql' => "char(1) NOT NULL default ''",
+		),
+		'rs_columns_align' => array(
+			'inputType' => 'select',
+			'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_align'],
+			'exclude' => true,
+			'options' => array('top', 'center', 'bottom', 'stretch', 'baseline'),
+			'reference' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_aligns'],
+			'eval' => array(
+				'includeBlankOption' => true,
+				'tl_class' => 'w25',
 			),
 			'sql' => "varchar(255) NOT NULL default ''",
 		),

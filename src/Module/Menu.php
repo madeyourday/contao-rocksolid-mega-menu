@@ -20,6 +20,7 @@ use Contao\System;
 use MadeYourDay\RockSolidMegaMenu\Model\MenuModel;
 use MadeYourDay\RockSolidMegaMenu\Model\MenuColumnModel;
 use MadeYourDay\RockSolidColumns\Element\ColumnsStart;
+use MadeYourDay\RockSolidSlider\Model\ContentModel;
 
 /**
  * Menu Frontend Module
@@ -92,6 +93,7 @@ class Menu extends ModuleNavigation
 			};
 		}
 		else {
+			$template->columnsWrapperClass = ColumnsStart::getWrapperClassName($menu->row());
 			$columnsConfig = ColumnsStart::getColumnsConfiguration($menu->row());
 			$template->getColumnClassName = function ($index) use($columnsConfig) {
 				$classes = array('rs-column');
@@ -113,9 +115,18 @@ class Menu extends ModuleNavigation
 			}
 
 			$columns = array();
+			$pids = array();
+			$idIndexes = array();
+
 			while ($menuColumns->next()) {
 
 				$column = $menuColumns->row();
+
+				if ($column['type'] === 'content') {
+					$pids[] = $column['id'];
+					$idIndexes[(int)$column['id']] = count($columns);
+					$column['html'] = '';
+				}
 
 				if ($column['page']) {
 					$pageResult = PageModel::findPublishedById($column['page']);
@@ -141,6 +152,15 @@ class Menu extends ModuleNavigation
 
 				$columns[] = $column;
 
+			}
+
+			if (count($pids)) {
+				$columnContents = ContentModel::findPublishedByPidsAndTable($pids, MenuColumnModel::getTable());
+				if ($columnContents) {
+					while ($columnContents->next()) {
+						$columns[$idIndexes[(int)$columnContents->pid]]['html'] .= $this->getContentElement($columnContents->current());
+					}
+				}
 			}
 
 			$template->columns = $columns;
@@ -270,6 +290,7 @@ class Menu extends ModuleNavigation
 		$page['target'] = '';
 		$page['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $pagesResult->description);
 		$page['rsmm_image'] = $this->getImageObject($page['rsmm_image'], $imageSize);
+		$page['rsmm_icon'] = $this->getImageObject($page['rsmm_icon']);
 
 		// Override the link target
 		if ($pagesResult->type == 'redirect' && $pagesResult->target)

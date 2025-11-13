@@ -15,8 +15,8 @@
 $GLOBALS['TL_LANG']['tl_page']['rocksolid_mega_menu_legend'] = 'Mega-Menu-Einstellungen';
 $GLOBALS['TL_LANG']['tl_page']['rsmm_subtitle'][0] = 'Untertitel';
 $GLOBALS['TL_LANG']['tl_page']['rsmm_subtitle'][1] = 'Untertitel der Seite.';
-$GLOBALS['TL_LANG']['tl_page']['rsmm_badge'][0] = 'Etikett';
-$GLOBALS['TL_LANG']['tl_page']['rsmm_badge'][1] = 'Etikett für die Anzeige in der Hauptnavigation.';
+$GLOBALS['TL_LANG']['tl_page']['rsmm_badge'][0] = 'Tag (Etikett)';
+$GLOBALS['TL_LANG']['tl_page']['rsmm_badge'][1] = 'Tag für die Anzeige in der Hauptnavigation.';
 $GLOBALS['TL_LANG']['tl_page']['rsmm_color'][0] = 'Farbe';
 $GLOBALS['TL_LANG']['tl_page']['rsmm_color'][1] = 'Hier können Sie eine hexadezimale Farbe (z.B. ff0000 für rot) sowie optional die Deckkraft in Prozent (z.B. 75) eingeben.';
 $GLOBALS['TL_LANG']['tl_page']['rsmm_icon'][0] = 'Icon';
