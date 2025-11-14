@@ -8,8 +8,6 @@
 
 namespace MadeYourDay\RockSolidMegaMenu\Module;
 
-use Contao\File;
-use Contao\FilesModel;
 use Contao\FrontendTemplate;
 use Contao\FrontendUser;
 use Contao\Input;
@@ -171,6 +169,26 @@ class Menu extends ModuleNavigation
 		}
 
 		return $template->parse();
+	}
+
+	protected static function getPublishedSubpagesByPid($intPid, $blnShowHidden=false, $blnIsSitemap=false): array|null
+	{
+		$return = parent::getPublishedSubpagesByPid(...func_get_args());
+
+		if (is_array($return)) {
+			// Sets hasSubpages to true if the page has an enabled mega menu but no real subpages
+			$return = array_map(
+				static function (array $row): array {
+					return [
+						...$row,
+						'hasSubpages' => $row['hasSubpages'] || ($row['page']->rsmm_enabled && $row['page']->rsmm_id),
+					];
+				},
+				$return,
+			);
+		}
+
+		return $return;
 	}
 
 	protected function buildPagesArray($pid, $imageSize, $customNav = false, $stopLevel = 0)
