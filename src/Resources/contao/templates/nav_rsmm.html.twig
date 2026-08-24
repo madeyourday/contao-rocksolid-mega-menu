@@ -1,0 +1,47 @@
+<ul class="{{ level }}">
+
+	{% for item in items %}
+
+		<li{{ attrs()
+			.addClass(item.class|default)
+			.addClass('-mega', item.rsmm_enabled|default)
+		}}>
+
+			{% if item.isActive|default %}
+				<strong{{ attrs()
+					.addStyle({ color: "##{item.rsmm_color|deserialize[0]|default}"}, item.rsmm_color|deserialize[0]|default)
+					.addClass(item.class)
+					.set('aria-current', 'page')
+					.set('aria-haspopup', true, item.subitems|default)
+					.set('itemprop', 'name')
+				}}>{{ item.link }}
+			{% else %}
+				<a{{ attrs()
+					.set('href', item.href)
+					.addStyle({ color: "##{item.rsmm_color|deserialize[0]|default}"}, item.rsmm_color|deserialize[0]|default)
+					.addClass(item.class)
+					.setIfExists('accesskey', item.accesskey|default)
+					.set('aria-haspopup', true, item.subitems|default)
+					.mergeWith(item.target|default)
+					.mergeWith(item.rel|default)
+					.set('itemprop', 'url')
+				}}><span itemprop="name">{{ item.link }}</span>
+			{% endif %}
+
+			{% if item.rsmm_subtitle|default %}
+				<small>{{ item.rsmm_subtitle }}</small>
+			{% endif %}
+
+			{% if item.isActive|default %}
+				</strong>
+			{% else %}
+				</a>
+			{% endif %}
+
+			{{ item.subitems|default|raw }}
+
+		</li>
+
+	{% endfor %}
+
+</ul>

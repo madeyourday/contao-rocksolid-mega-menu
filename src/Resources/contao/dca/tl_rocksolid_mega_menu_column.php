@@ -52,6 +52,10 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu_column'] = array(
 			'child_record_callback' => array('MadeYourDay\\RockSolidMegaMenu\\MegaMenu', 'listColumns'),
 			'child_record_class' => 'no_padding',
 		),
+		'label' => array(
+			'fields' => array('name'),
+			'format' => '%s',
+		),
 		'global_operations' => array(
 			'all' => array(
 				'label' => &$GLOBALS['TL_LANG']['MSC']['all'],

@@ -50,7 +50,7 @@ class MegaMenu extends Backend
 	 */
 	public function listColumns($arrRow)
 	{
-		return '<div class="tl_content_left">' . $arrRow['name'] . '</div>';
+		return '<div class="tl_content_left">' . StringUtil::specialchars($arrRow['name']) . '</div>';
 	}
 
 	/**

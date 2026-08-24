@@ -1,0 +1,31 @@
+<ul>
+	{% for subPage in items %}
+		<li{{ attrs()
+			.addClass(subPage.class)
+		}}>
+		{% if subPage.href %}
+			<a{{ attrs()
+				.set('href', subPage.href)
+				.addClass(subPage.class)
+				.mergeWith(subPage.target)
+			}}>
+		{% endif %}
+		{% if (type === 'manual_image' or type === 'auto_image') and subPage.rsmm_image %}
+			{% include '@Contao/picture_default.html.twig' with subPage.rsmm_image.picture only %}
+		{% endif %}
+		{{ subPage.link }}
+		{% if subPage.rsmm_subtitle %}
+			<small>{{ subPage.rsmm_subtitle }}</small>
+		{% endif %}
+		{% if subPage.href %}
+			</a>
+		{% endif %}
+		{% if subPage.pages|length %}
+			{% include '@Contao/rsmmnav_default.html.twig' with {
+				items: subPage.pages,
+				type: type,
+			} only %}
+		{% endif %}
+		</li>
+	{% endfor %}
+</ul>

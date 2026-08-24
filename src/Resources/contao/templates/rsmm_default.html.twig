@@ -1,0 +1,181 @@
+<div{{ attrs()
+	.addClass('mega-dropdown')
+	.addClass(level|default)
+	.addClass(cssClass|default)
+	.setIfExists('id', cssId|default)
+	.addStyle(backgroundStyle|default)
+}}>
+<div class="mega-dropdown-inner">
+
+	{% if slider|default %}
+		<div class="mega-dropdown-slider">
+	{% endif %}
+
+	{% if type === 'html' %}
+
+		{{ html|raw|insert_tag_raw }}
+
+	{% elseif type === 'auto' %}
+
+		{% for index, page in pages %}
+
+			<section{{ attrs()
+				.addClass('mega-dropdown-column')
+				.addClass(page.class)
+				.addClass(getColumnClassName.invoke(index))
+			}}>
+
+				<h3>
+					{% if page.href|default %}
+						<a{{ attrs()
+							.set('href', page.href)
+							.mergeWith(page.target|default)
+						}}>
+					{% endif %}
+					{{ page.link }}
+					{% if page.href|default %}
+						</a>
+					{% endif %}
+				</h3>
+
+				{% if page.pages|length %}
+
+					{% include '@Contao/rsmmnav_default.html.twig' with {
+						items: page.pages,
+						type: type,
+					} only %}
+
+				{% endif %}
+
+			</section>
+
+		{% endfor %}
+
+	{% elseif type === 'auto_images' %}
+
+		{% for index, page in pages %}
+
+			<section{{ attrs()
+				.addClass('mega-dropdown-column')
+				.addClass(page.class)
+				.addClass(getColumnClassName.invoke(index))
+			}}>
+
+				<h3>
+					{% if page.href|default %}
+						<a{{ attrs()
+							.set('href', page.href)
+							.mergeWith(page.target|default)
+						}}>
+					{% endif %}
+					{{ page.link }}
+					{% if page.href|default %}
+						</a>
+					{% endif %}
+				</h3>
+
+				{% if page.rsmm_image %}
+					<div class="mega-dropdown-image">
+						{% if page.href|default %}
+							<a{{ attrs()
+								.set('href', page.href)
+								.mergeWith(page.target|default)
+							}}>
+						{% endif %}
+						{% include '@Contao/picture_default.html.twig' with page.rsmm_image.picture only %}
+						{% if page.href|default %}
+							</a>
+						{% endif %}
+					</div>
+				{% endif %}
+
+			</section>
+
+		{% endfor %}
+
+	{% else %}
+
+		{% for index, column in columns %}
+
+			<section{{ attrs()
+				.addClass('mega-dropdown-column')
+				.addClass(column.cssClass)
+				.addClass(getColumnClassName.invoke(index))
+				.setIfExists('id', column.cssId)
+			}}>
+
+				{% if column.displayName or column.type === 'link' %}
+					<h3>
+						{% if column.page.href|default %}
+							<a{{ attrs()
+								.set('href', column.page.href)
+								.mergeWith(column.page.target|default)
+							}}>
+						{% endif %}
+						{{ column.name }}
+						{% if column.page.href|default %}
+							</a>
+						{% endif %}
+					</h3>
+				{% endif %}
+
+				{% if column.image %}
+					<div class="mega-dropdown-image">
+						{% if column.page.href|default %}
+							<a{{ attrs()
+								.set('href', column.page.href)
+								.mergeWith(column.page.target|default)
+							}}>
+						{% endif %}
+						{% include '@Contao/picture_default.html.twig' with column.image.picture only %}
+						{% if column.page.href|default %}
+							</a>
+						{% endif %}
+					</div>
+				{% endif %}
+
+				{% if column.text|trim %}
+					<div class="mega-dropdown-text">
+						{{ column.text|raw }}
+					</div>
+				{% endif %}
+
+				{% if column.pages|length %}
+
+					{% include '@Contao/rsmmnav_default.html.twig' with {
+						items: column.pages,
+						type: column.type,
+					} only %}
+
+				{% endif %}
+
+				{% if column.type === 'html' %}
+					{{ column.html|raw|insert_tag_raw }}
+				{% endif %}
+
+			</section>
+
+		{% endfor %}
+
+	{% endif %}
+
+	{% if slider|default %}
+
+		</div>
+
+		<script>
+			(function($) {
+				var slider = $('.mega-dropdown-slider').last();
+				slider.rstSlider({{ sliderOptions|json_encode|raw }});
+				slider.parent().parent().parent().on('mouseenter', function() {
+					if (slider.data('rstSlider')) {
+						slider.data('rstSlider').resize();
+					}
+				});
+			})(jQuery);
+		</script>
+
+	{% endif %}
+
+</div>
+</div>

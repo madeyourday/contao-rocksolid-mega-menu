@@ -21,8 +21,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
 
-	$GLOBALS['TL_CSS'][] = 'bundles/rocksolidcolumns/css/be_main.css';
-
 	// Load module language file
 	$this->loadLanguageFile('tl_module');
 
@@ -61,7 +59,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 				'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['editLicense'],
 				'href' => 'table=tl_rocksolid_mega_menu_license',
 				'class' => 'header_icon',
-				'icon' => 'modules_.svg',
+				'icon' => version_compare(\Contao\CoreBundle\ContaoCoreBundle::getVersion(), '5.7', '<') ? 'modules_.svg' : 'protected.svg',
 			),
 			'all' => array(
 				'label' => &$GLOBALS['TL_LANG']['MSC']['all'],
@@ -154,7 +152,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['rs_columns_large'],
 			'eval' => array(
 				'mandatory' => true,
-				'tl_class' => 'rs_columns_w33',
+				'tl_class' => 'w33',
 			),
 			'sql' => "varchar(255) NOT NULL default ''",
 		),
@@ -163,7 +161,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 			'exclude' => true,
 			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['rs_columns_medium'],
 			'eval' => array(
-				'tl_class' => 'rs_columns_w33',
+				'tl_class' => 'w33',
 			),
 			'sql' => "varchar(255) NOT NULL default ''",
 		),
@@ -172,7 +170,7 @@ $GLOBALS['TL_DCA']['tl_rocksolid_mega_menu'] = array(
 			'exclude' => true,
 			'label' => &$GLOBALS['TL_LANG']['tl_rocksolid_mega_menu']['rs_columns_small'],
 			'eval' => array(
-				'tl_class' => 'rs_columns_w33',
+				'tl_class' => 'w33',
 			),
 			'sql' => "varchar(255) NOT NULL default ''",
 		),
