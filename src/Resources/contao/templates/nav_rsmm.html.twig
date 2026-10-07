@@ -14,10 +14,10 @@
 					.set('aria-current', 'page')
 					.set('aria-haspopup', true, item.subitems|default)
 					.set('itemprop', 'name')
-				}}>{{ item.link }}
+				}}>{{ item.link|insert_tag_raw }}
 			{% else %}
 				<a{{ attrs()
-					.set('href', item.href)
+					.set('href', item.href|insert_tag)
 					.addStyle({ color: "##{item.rsmm_color|deserialize[0]|default}"}, item.rsmm_color|deserialize[0]|default)
 					.addClass(item.class)
 					.setIfExists('accesskey', item.accesskey|default)
@@ -25,11 +25,11 @@
 					.mergeWith(item.target|default)
 					.mergeWith(item.rel|default)
 					.set('itemprop', 'url')
-				}}><span itemprop="name">{{ item.link }}</span>
+				}}><span itemprop="name">{{ item.link|insert_tag_raw }}</span>
 			{% endif %}
 
 			{% if item.rsmm_subtitle|default %}
-				<small>{{ item.rsmm_subtitle }}</small>
+				<small>{{ item.rsmm_subtitle|insert_tag_raw }}</small>
 			{% endif %}
 
 			{% if item.isActive|default %}

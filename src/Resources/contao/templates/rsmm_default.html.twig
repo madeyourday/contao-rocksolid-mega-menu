@@ -28,11 +28,11 @@
 				<h3>
 					{% if page.href|default %}
 						<a{{ attrs()
-							.set('href', page.href)
+							.set('href', page.href|insert_tag)
 							.mergeWith(page.target|default)
 						}}>
 					{% endif %}
-					{{ page.link }}
+					{{ page.link|insert_tag_raw }}
 					{% if page.href|default %}
 						</a>
 					{% endif %}
@@ -64,11 +64,11 @@
 				<h3>
 					{% if page.href|default %}
 						<a{{ attrs()
-							.set('href', page.href)
+							.set('href', page.href|insert_tag)
 							.mergeWith(page.target|default)
 						}}>
 					{% endif %}
-					{{ page.link }}
+					{{ page.link|insert_tag_raw }}
 					{% if page.href|default %}
 						</a>
 					{% endif %}
@@ -78,7 +78,7 @@
 					<div class="mega-dropdown-image">
 						{% if page.href|default %}
 							<a{{ attrs()
-								.set('href', page.href)
+								.set('href', page.href|insert_tag)
 								.mergeWith(page.target|default)
 							}}>
 						{% endif %}
@@ -108,11 +108,11 @@
 					<h3>
 						{% if column.page.href|default %}
 							<a{{ attrs()
-								.set('href', column.page.href)
+								.set('href', column.page.href|insert_tag)
 								.mergeWith(column.page.target|default)
 							}}>
 						{% endif %}
-						{{ column.name }}
+						{{ column.name|insert_tag_raw }}
 						{% if column.page.href|default %}
 							</a>
 						{% endif %}
@@ -123,7 +123,7 @@
 					<div class="mega-dropdown-image">
 						{% if column.page.href|default %}
 							<a{{ attrs()
-								.set('href', column.page.href)
+								.set('href', column.page.href|insert_tag)
 								.mergeWith(column.page.target|default)
 							}}>
 						{% endif %}
@@ -136,7 +136,7 @@
 
 				{% if column.text|trim %}
 					<div class="mega-dropdown-text">
-						{{ column.text|raw }}
+						{{ column.text|raw|csp_inline_styles|encode_email|insert_tag_raw }}
 					</div>
 				{% endif %}
 
