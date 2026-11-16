@@ -18,6 +18,7 @@ use Contao\System;
 use MadeYourDay\RockSolidMegaMenu\Model\MenuModel;
 use MadeYourDay\RockSolidMegaMenu\Model\MenuColumnModel;
 use MadeYourDay\RockSolidColumns\Element\ColumnsStart;
+use Symfony\Component\Routing\Exception\ExceptionInterface as RoutingException;
 
 /**
  * Menu Frontend Module
@@ -259,7 +260,12 @@ class Menu extends ModuleNavigation
 
 		}
 		if (!$href) {
-			$href = $pagesResult->current()->getFrontendUrl();
+			try {
+				$href = $pagesResult->current()->getFrontendUrl();
+			}
+			catch (RoutingException $e) {
+				$href = '';
+			}
 		}
 
 		if (
